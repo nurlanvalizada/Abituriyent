@@ -1,0 +1,35 @@
+﻿@model Abituriyent.Info.Web.Models.ViewModels.AboutPageViewModel
+@{
+    ViewData["Title"] = "İstifadəçi Razılaşması";
+}
+
+<section class="grey section">
+    <div class="container">
+        <div class="row">
+            <div id="content" class="col-md-12 col-sm-12 col-xs-12">
+                <div class="blog-wrapper">
+                    <div class="row second-bread">
+                        <div class="col-md-6 text-left">
+                            <h1>İstifadəçi Anlaşması</h1>
+                        </div><!-- end col -->
+                        <div class="col-md-6 text-right">
+                            <div class="bread">
+                                <ol class="breadcrumb">
+                                    <li><a href="#">Home</a></li>
+                                    <li class="active">TermsAndConditions</li>
+                                </ol>
+                            </div><!-- end bread -->
+                        </div><!-- end col -->
+                    </div><!-- end row -->
+                </div><!-- end blog-wrapper -->
+
+                <div class="blog-wrapper">
+                    <div class="blog-desc">
+                      @Html.Raw(ViewBag.TermsAndConditions)
+                    </div><!-- end desc -->
+                </div><!-- end blog-wrapper -->
+            </div><!-- end content -->
+
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section><!-- end section -->

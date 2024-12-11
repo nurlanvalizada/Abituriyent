@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Abituriyent.Info.Web.Models.AdminViewModels.AdminViewModel>
+
+@{
+    ViewData["Title"] = "Admins";
+    Layout = "_AdminLayout";
+}
+
+<h2>Admins</h2>
+<br />
+<p>
+    <a asp-action="AdminCreate">Add Admin</a>
+</p>
+
+<table class="table table-bordered table-striped datatable" id="table-2">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Username)</th>
+            <th>@Html.DisplayNameFor(model => model.Email)</th>
+            <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+            <th>@Html.DisplayNameFor(model => model.LastName)</th>
+            <th>@Html.DisplayNameFor(model => model.Gender)</th>
+            <th colspan="2" class="text-center">Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @if (item.Gender == 1)
+                {
+                        <span>Kişi</span>
+                    }
+                    else
+                    {
+                        <span>Qadın</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="AdminEdit" asp-route-id="@item.Id" class="btn btn-default btn-sm btn-icon icon-left">
+                        <i class="entypo-pencil"></i>
+                        Edit
+                    </a>
+                </td>
+                <td>
+                    <form asp-controller="Admin" asp-action="AdminDelete" method="post">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <button onclick="return confirm('Are you sure you want to delete this item ?')" type="submit" class="btn btn-danger btn-sm btn-icon icon-left">
+                            <i class="entypo-cancel"></i>
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

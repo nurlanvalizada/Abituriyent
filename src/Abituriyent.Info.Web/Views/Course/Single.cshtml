@@ -1,0 +1,197 @@
+﻿@using Abituriyent.Info.Core.Models
+@model Abituriyent.Info.Web.Models.ViewModels.CourseViewModel
+@{
+    ViewData["Title"] = Model.Name +" kursu";
+    var averageStars = Model.CourseRatings.Any() ? (int)Model.CourseRatings.Average(cr => cr.Stars) : 0;
+}
+
+<section class="grey page-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-left">
+                <h1>@Model.Name Kursu</h1>
+            </div><!-- end col -->
+            <div class="col-md-6 text-right">
+                <div class="bread">
+                    <ol class="breadcrumb">
+                        <li><a href="#">Course</a></li>
+                        <li class="active">Single</li>
+                    </ol>
+                </div><!-- end bread -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section><!-- end section -->
+
+<section class="white section">
+    <div class="container">
+        <div class="row">
+            <div id="course-left-sidebar" class="col-md-4">
+                <div class="course-image-widget">
+                    @if (Model.ImageUrl != null)
+                    {
+                        <img src="@Model.ImageUrl" alt="" class="img-responsive">
+                    }
+                    else
+                    {
+                        <img src="~/upload/course_01.png" alt="" class="img-responsive">
+                    }
+                    
+                </div><!-- end image widget -->
+                <div class="course-meta">
+                    <p class="course-category">Qrup : @Model.Group.Name</p>
+                    <hr>
+                    <div class="rating">
+                        <p>
+                            Qiymətləndirmələr : &nbsp;
+                            @for (var i = 0; i < averageStars; i++)
+                            {
+                                <i class="fa fa-star rateCourse"></i>
+                            }
+                            @for (var j = 0; j < 5 - averageStars; j++)
+                            {
+                                <i class="fa fa-star-o rateCourse"></i>
+                            }
+                            <a title="" href="#reviews">&nbsp; (<strong id="rateCounts" class="rateCounts">@Model.CourseRatings.Count()</strong>)</a>
+                        </p>
+                    </div><!-- end rating -->
+                    <hr>
+                    <p class="course-student">Abituriyent Sayı : @Model.StudentCount </p>
+                    <hr>
+                    <p class="course-instructors">Müəllim : <a href="#" title=""><img src="~/upload/student_01.png" class="img-circle" alt=""> @Model.Teacher?.FullName</a></p>
+                </div><!-- end meta -->
+                <br />
+
+                <!-- Modal Exam Already Taken-->
+                <div class="modal fade" id="modal-rating" style="z-index: 10000;">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">Qiymətləndirmə</h4>
+                            </div>
+                            <div class="modal-body" id="ratingBody">
+                                <input type="hidden" id="courseId" value="@Model.Id" />
+                                @{
+                                    var userRating = Model.CourseRatings.FirstOrDefault(cr => cr.Student.Id == Model.Student.Id);
+                                    var stars = userRating?.Stars ?? 0;
+                                    var comment = userRating?.Comment ?? string.Empty;
+                                }
+                                <input id="rateValue" value="@stars" type="number" min=0 max=5 step=1 data-size="md">
+                                <textarea class="form-control" name="comments" id="rateComments" rows="6" placeholder="Sizin rəyiniz">@comment</textarea>
+                                <br />
+                                <button type="submit" value="SEND" id="submitRate" class="btn btn-primary btn-block">Kursu Qiymətləndirin</button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- end col -->
+            <div id="course-content" class="col-md-8">
+                <div class="course-description">
+                    <small>
+                        Kursun Statusu:
+                        @switch (Model.CourseStatus)
+                        {
+                            case LessonStatus.Complete:
+                                <span>Bitmiş</span>
+                                break;
+                            case LessonStatus.InProgress:
+                                <span>Davam Etməkdə</span>
+                                break;
+                            case LessonStatus.NotStarted:
+                                <span>Başlanılmamış</span>
+                                break;
+                        }
+                    </small>
+                    <h3 class="course-title">@Model.Name</h3>
+                    <div>
+                        @Html.Raw(Model.Description)
+                    </div>
+                </div><!-- end desc -->
+
+                @await Html.PartialAsync("_CourseLessons", Model.Lessons)
+                <hr class="invis">
+                <div id="reviews" class="feedbacks">
+                    <p>
+                        <a class="btn btn-default btn-block" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            Tələbələr bu dərs haqqında nə düşünür? (<span class="rateCounts">@Model.CourseRatings.Count()</span> Qiymətləndirmə)
+                        </a>
+                    </p>
+                    <div class="collapse" id="collapseExample">
+                        <div class="well">
+                            @foreach (var courseRating in Model.CourseRatings)
+                            {
+                                <div class="media">
+                                    <div class="media-body">
+                                        <input type="hidden" id="ratedStudentId" value="@courseRating.Student.Id" />
+                                        <h4 class="media-heading">@courseRating.Student.Person.FirstName @courseRating.Student.Person.LastName</h4>
+                                        <div class="rating">
+                                            @for (var i = 0; i < courseRating.Stars; i++)
+                                            {
+                                                <i class="fa fa-star"></i>
+                                            }
+                                            @for (var j = 0; j < 5 - courseRating.Stars; j++)
+                                            {
+                                                <i class="fa fa-star-o"></i>
+                                            }
+                                        </div><!-- end rating -->
+                                        <p>@courseRating.Comment</p>
+                                    </div>
+                                </div><!-- end media -->
+                            }
+                        </div><!-- end well -->
+                    </div><!-- end collapse -->
+                </div><!-- end reviews -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section><!-- end section -->
+
+<script>
+    $(document)
+        .ready(function () {
+            $(".rateCourse")
+                .click(function () {
+                    jQuery('#modal-rating').modal('show', { backdrop: 'static' });
+                });
+            $(".rateCourse").css("cursor", "pointer");
+            $("#rateValue").rating({ 'language': 'az' });
+
+            $("#submitRate")
+                .click(function () {
+                    var courseId = $("#courseId").val();
+                    var rateValue = $("#rateValue").val();
+                    var rateComment = $("#rateComments").val();
+                    var jsonString = '"courseId":' + courseId + ',';
+                    jsonString += '"rateValue":' + rateValue + ',';
+                    if (rateComment !== undefined && rateComment !== null) {
+                        jsonString += '"rateComment":"' + rateComment + '",';
+                    }
+                    jsonString = "{" + jsonString.substring(0, jsonString.length - 1) + "}";
+                    var jsonData = window.jQuery.parseJSON(jsonString);
+
+                    $.ajax({
+                        url: '/api/MyApi/RateCourse',
+                        type: 'POST',
+                        data: jsonData,
+                        dataType: 'json',
+                        success: function (data) {
+                            $("#ratingBody").empty();
+                            $("#ratingBody")
+                                .append("<div><h1>Sizin qiymətləndirməniz qeydə alındı .</br>Təşəkkür edirik...</h1></div>");
+                            window.setTimeout('location.reload()', 500);
+                        }
+                    });
+                });
+        });
+</script>
+
+@section Scripts{
+    <script src="~/js/star-rating.min.js"></script>
+    <script src="~/js/az.js"></script>
+}

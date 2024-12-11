@@ -1,0 +1,305 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Abituriyent.Info | Education Web Site">
+    <meta name="author" content="Nurlan Valizada">
+    <meta name="keywords" content="Education, Online Learning, Qəbul İmatahanı, TQDK">
+    <title>@ViewData["Title"] - Abituriyent.Info</title>
+    <link rel="shortcut icon" href="~/images/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="~/images/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="57x57" href="~/images/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="~/images/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="~/images/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="~/images/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="~/images/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="~/images/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="~/images/apple-touch-icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="~/images/apple-touch-icon-180x180.png" />
+    
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <environment names="Development">
+        <link rel="stylesheet" type="text/css" href="~/rs-plugin/css/settings.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome-4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="~/js/dropzone/dropzone.css">
+        <link rel="stylesheet" type="text/css" href="~/js/dropzone/neon-forms.css">
+        <link rel="stylesheet" type="text/css" href="~/css/animate.css">
+        <link rel="stylesheet" type="text/css" href="~/css/menu.css">
+        <link rel="stylesheet" type="text/css" href="~/css/carousel.css">
+        <link rel="stylesheet" type="text/css" href="~/css/bbpress.css">
+        <link rel="stylesheet" type="text/css" href="~/css/bxslider.css">
+        <link rel="stylesheet" type="text/css" href="~/css/style.css">
+        <link href="~/css/star-rating.min.css" rel="stylesheet" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" type="text/css" href="~/css/main_css_bundle.min.css">
+    </environment>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="~/js/jquery.min.js"></script>
+</head>
+<body class="bbPress">    
+    <div id="loader">
+        <div class="loader-container">
+            <img src="~/images/site.gif" alt="" class="loader-site">
+        </div>
+    </div>
+    <div id="wrapper">
+        <div class="topbar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-left">
+                        <p>
+                            <i class="fa fa-graduation-cap"></i> Qəbul İmtahanlarına <b>Ən Mükəmməl</b> şəkildə hazırlaşacağınız tək ünvan ...
+                        </p>
+                    </div><!-- end left -->
+
+                    <div class="col-md-6 text-right">
+                        <ul class="list-inline">
+                            <li>
+                                @await Component.InvokeAsync("Social")
+                            </li>
+                            <li class="dropdown">
+                                @if (!User.Identity.IsAuthenticated)
+                                {
+                                    <a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-lock"></i> Daxil ol</a>
+                                    <div class="dropdown-menu">
+
+                                        <div class="form-title">
+                                            <h4>Hesaba Giriş</h4>
+                                            <hr>
+                                        </div>
+
+                                        <form asp-controller="Account" asp-action="Login" method="post">
+                                            <div>
+                                                <input name="Username" class="form-control" placeholder="İstifadəçi Adı" />
+                                                <div class="formpassword">
+                                                    <input name="Password" type="password" class="form-control" placeholder="******" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <input name="RememberMe" type="checkbox" value="true" class="text-center" />
+                                                    Məni Xatırla?
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <button type="submit" class="btn btn-block btn-primary">Daxil Ol</button>
+                                            </div>
+                                        </form>
+                                        <form asp-controller="Account" asp-action="ExternalLogin" method="post" style="margin-top: 5px;">
+                                            <button type="submit" id="fbLogin" name="provider" value="Facebook" class="btn btn-block btn-primary"><i class="fa fa-facebook-square"></i> Facebook ilə Daxil Ol</button>
+                                        </form>
+                                        <hr>
+                                        <h4>
+                                            <a asp-controller="Account" asp-action="Register">Hesab Yarat</a>
+                                        </h4>
+                                    </div>
+                                }
+                            </li>
+                        </ul>
+                    </div><!-- end right -->
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </div><!-- end topbar -->
+
+        <header class="header">
+            <div class="container">
+                <div class="hovermenu ttmenu">
+                    <div class="navbar navbar-default" role="navigation">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="fa fa-bars"></span>
+                            </button>
+                            <div class="logo">
+                                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                                    <img src="~/images/logo-abit.png" alt="">
+                                </a>
+                            </div>
+                        </div><!-- end navbar-header -->
+
+                        <div class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav">
+                                <li>
+                                    <a id="home" asp-controller="Home" asp-action="Index">Ana Səhifə</a>
+                                </li>
+                                <li>
+                                    <a id="about" asp-controller="Home" asp-action="About">Haqqımızda</a>
+                                </li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <li>
+                                        <a id="course" asp-controller="Course" asp-action="Index">Kurslar</a>
+                                    </li>
+                                    <li>
+                                        <a id="exam" asp-controller="Exam" asp-action="Index">İmtahanlar</a>
+                                    </li>
+                                }
+                                <li>
+                                    <a id="news" asp-controller="News" asp-action="Index">Xəbərlər</a>
+                                </li>
+
+                                <li>
+                                    <a id="contact" asp-controller="Home" asp-action="Contact">Bizimlə Əlaqə</a>
+                                </li>
+                            </ul><!-- end nav navbar-nav -->
+                            @await Html.PartialAsync("_LoginPartial")
+                        </div><!--/.nav-collapse -->
+                    </div><!-- end navbar navbar-default clearfix -->
+                </div><!-- end menu 1 -->
+            </div><!-- end container -->
+        </header><!-- end header -->
+
+        @RenderBody()
+
+        <footer class="dark footer section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-md-6 col-xs-12">
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h4>Abituriyent.Info haqqında</h4>
+                                <hr>
+                            </div>
+                            <p>
+                                Biz <a style="color: white" asp-controller="Home" asp-action="Index">abituriyent.info</a> olaraq tam pulsuz, keyfiyyətli və online təhsil ilə xidmətinizdəyik.
+                                Dərslərimiz təcrübəli müəllimlər tərəfindən keçirilir və bütün TQDK proqramını əhatə edir...
+                            </p>
+                            <a asp-controller="Home" asp-action="About" class="btn btn-default">Daha Ətraflı</a>
+                        </div><!-- end widget -->
+                    </div><!-- end col -->
+
+                    <div class="col-md-3 col-md-6 col-xs-12">
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h4>Sevimli Keçidlər</h4>
+                                <hr>
+                            </div>
+
+                            <div>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <p>
+                                        <a style="color: #999eab" asp-controller="Course" asp-action="Index">Kurslar</a>
+                                    </p>
+                                    <p>
+                                        <a style="color: #999eab" asp-controller="Exam" asp-action="Index">İmtahanlar</a>
+                                    </p>
+                                }
+                                else
+                                {
+                                    <p>
+                                        <a style="color: #999eab" asp-controller="Home" asp-action="Contact">Bizə mesaj yaz</a>
+                                    </p>
+                                }
+
+                                <p>
+                                    <a style="color: #999eab" asp-controller="News" asp-action="Index">Xəbərlər</a>
+                                </p>
+                            </div><!-- end widget -->
+                        </div><!-- end col -->
+                    </div>
+
+                    <div class="col-md-3 col-md-6 col-xs-12">
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h4>Hesab Əməliyyatları</h4>
+                                <hr>
+                            </div>
+
+                            <div>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <p>
+                                        <a style="color: #999eab" asp-controller="Manage" asp-action="Index">Hesabı İdarə Et</a>
+                                    </p>
+                                    <p>
+                                        <a style="color: #999eab" asp-controller="Account" asp-action="Edit">Profili redaktə et</a>
+                                    </p>
+                                    <p>
+                                        <a style="color: #999eab" asp-controller="Account" asp-action="Rating">Reytinq</a>
+                                    </p>
+                                }
+                                else
+                                {
+                                    <p>
+                                        <a style="color: #999eab" asp-controller="Account" asp-action="Login">Artıq hesabın var? Daxil Ol</a>
+                                    </p>
+                                    <p>
+                                        <a style="color: #999eab" asp-controller="Account" asp-action="Register">İndi Qeydiyyatdan Keç</a>
+                                    </p>
+                                }
+
+                            </div><!-- end widget -->
+                        </div><!-- end col -->
+                    </div>
+
+                    <div class="col-md-3 col-md-6 col-xs-12">
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h4>Əlaqə Məlumatları</h4>
+                                <hr>
+                            </div>
+                            @await Component.InvokeAsync("ContactDetails")
+                        </div><!-- end widget -->
+                    </div><!-- end col -->
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </footer><!-- end section -->
+
+        <section class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-left">
+                        <p>
+                            © @DateTime.Now.Year Abituriyent.info. Bütün hüquqlar qorunur
+                        </p>
+                    </div><!-- end col -->
+                    <div class="col-md-6 text-right">
+                        <ul class="list-inline">
+                            <li>
+                                <a asp-controller="Home" asp-action="TermsAndConditions">İstifadəçi Anlaşması</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </section><!-- end section -->
+    </div><!-- end wrapper -->
+    <script src="~/admin/assets/js/bootstrap.min.js"></script>
+    <environment names="Development">
+        <script src="~/js/retina.js"></script>
+        <script src="~/js/wow.js"></script>
+        <script src="~/js/carousel.js"></script>
+        <!-- CUSTOM PLUGINS -->
+        <script src="~/js/custom.js"></script>
+        <script src="~/js/dropzone/dropzone.js"></script>
+        <script src="~/js/dropzone/fileinput.js"></script>
+        <script src="~/js/mycustomscripts.js"></script>
+        <script src="~/js/menu-active-colors.js"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/js/main-js-bundle.min.js"></script>
+    </environment>
+    <script>
+        (function (d, s, id) {
+            var fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            var js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/az_AZ/sdk.js#xfbml=1&version=v2.8&appId=732209420266972";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

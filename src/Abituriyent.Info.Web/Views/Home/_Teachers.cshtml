@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Abituriyent.Info.Core.Domain.Teacher>
+@for (var i = 0; i < Model.Count(); i = i + 4)
+            {
+    <div class="team-members row">
+        @foreach (var teacher in Model.Skip(i).Take(4))
+        {
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="team">
+                    @if (teacher.ImageUrl == null)
+                    {
+                        <img src="~/upload/team_01.jpg" alt="" class="img-responsive wow fadeInUp">
+                    }
+                    else
+                    {
+                        <img src="@teacher.ImageUrl" alt="" class="img-responsive wow fadeInUp">
+                    }
+                    <div class="team-hover-content">
+                        <h5>@teacher.FullName</h5>
+                        <span>@teacher.Profession</span>
+                        <p>@teacher.About</p>
+                        <div class="social">
+                            <a href="@teacher.FacebookProfile" title="Facebook"><i class="fa fa-facebook"></i></a>
+                            <a href="@teacher.TwitterProfile" title="Twitter"><i class="fa fa-twitter"></i></a>
+                            <a href="@teacher.GooglePlusProfile" title="Google Plus"><i class="fa fa-google-plus"></i></a>
+                        </div>
+                    </div>
+                </div><!-- end team -->
+            </div><!-- end col -->
+        }
+    </div><!-- end row -->
+    <br />
+}

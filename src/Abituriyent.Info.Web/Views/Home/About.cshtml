@@ -1,0 +1,136 @@
+﻿@model Abituriyent.Info.Web.Models.ViewModels.AboutPageViewModel
+@{
+    ViewData["Title"] = "Haqqımızda";
+    int iterator = 0;
+}
+<section class="grey page-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-left">
+                <h1>Haqqımızda</h1>
+            </div><!-- end col -->
+            <div class="col-md-6 text-right">
+                <div class="bread">
+                    <ol class="breadcrumb">
+                        <li><a href="#">Home</a></li>
+                        <li class="active">About</li>
+                    </ol>
+                </div><!-- end bread -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section><!-- end section -->
+<section class="white section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="media-element">
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner" role="listbox">
+                            <div class="item active">
+                                <img src="~/upload/about_01.jpg" alt="" class="img-responsive">
+                            </div>
+                            <div class="item">
+                                <img src="~/upload/about_02.jpg" alt="" class="img-responsive">
+                            </div>
+                        </div>
+                        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                            <span class="fa fa-angle-left" aria-hidden="true"></span>
+                            <span class="sr-only">Əvvəlki</span>
+                        </a>
+                        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                            <span class="fa fa-angle-right" aria-hidden="true"></span>
+                            <span class="sr-only">Növbəti</span>
+                        </a>
+                    </div>
+                </div><!-- end blog-image -->
+            </div><!-- end col -->
+            <div class="col-md-6">
+                <div class="content-widget">
+                    <div class="widget-title">
+                        <h4>@Model.AboutMain.Item1</h4>
+                        <hr>
+                    </div>
+                    @Html.Raw(Model.AboutMain.Item2)
+                </div><!-- end content-widget -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+        <hr class="invis1">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="content-widget">
+                    <div class="widget-title">
+                        <h4>Niye bizi seçməlisiniz ?</h4>
+                        <hr>
+                    </div>
+                    <div class="accordion-widget">
+                        <div class="accordion-toggle-2">
+                            <div class="panel-group" id="accordion">
+                                @foreach (var whyWeCase in Model.WhyWeCases)
+                                {
+                                    var collapseId = "collapse" + (++iterator);
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <div class="panel-title">
+                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#@collapseId">
+                                                    <h3>
+                                                        @whyWeCase.Key <i class="indicator fa fa-plus"></i>
+                                                    </h3>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div id="@collapseId" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <p>@whyWeCase.Value</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div><!-- accordion -->
+                    </div><!-- end accordion-widget -->
+                </div><!-- end content-widget -->
+            </div><!-- end col -->
+            <div class="col-md-6">
+                <div class="content-widget">
+                    <div class="widget-title">
+                        <h4>Bizim Nəaliyyətlərimiz</h4>
+                        <hr>
+                    </div>
+                    <div class="teacher-skills">
+                        @foreach (var achivement in Model.AchivementsByPercentage)
+                        {
+                            <p>@achivement.Key - @achivement.Value%</p>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: @achivement.Value%;">
+                                    <span class="sr-only">@achivement.Key @achivement.Value%</span>
+                                </div>
+                            </div><!-- end progress -->
+                        }
+                    </div><!-- end skills -->
+                </div><!-- end content-widget -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+        <hr class="invis1">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="content-widget">
+                    <div class="widget-title">
+                        <h4>Bizim komanda ilə tanış olun</h4>
+                        <hr>
+                    </div>
+                    @await Html.PartialAsync("_Teachers", Model.Teachers)
+                </div><!-- end content-widget -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+        <hr class="invis1">
+        <div class="content-widget">
+            <div class="widget-title">
+                <h4>İşlədiyimiz Şirkətlər</h4>
+                <hr>
+            </div>
+        </div><!-- end row -->
+        <div class="row">
+        </div><!-- end button-wrapper -->
+    </div><!-- end container -->
+</section><!-- end section -->

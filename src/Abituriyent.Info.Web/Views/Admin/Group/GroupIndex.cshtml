@@ -1,0 +1,54 @@
+@model IEnumerable<Abituriyent.Info.Core.Domain.Group>
+
+@{
+    ViewData["Title"] = "Groups";
+    Layout = "_AdminLayout";
+}
+
+<h2>Groups</h2>
+<br />
+<p>
+    <a asp-action="GroupCreate">Add Group</a>
+</p>
+
+<table class="table table-bordered table-striped datatable" id="table-2">
+    <thead class="">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th colspan="2" class="text-center">Actions</th>
+            <th>Related Courses</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a asp-action="GroupEdit" asp-route-id="@item.Id" class="btn btn-default btn-sm btn-icon icon-left">
+                        <i class="entypo-pencil"></i>
+                        Edit
+                    </a>
+                </td>
+                <td>
+                    <form asp-controller="Admin" asp-action="GroupDelete" method="post">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <button onclick="return confirm('Are you sure you want to delete this item ?')" type="submit" class="btn btn-danger btn-sm btn-icon icon-left">
+                            <i class="entypo-cancel"></i>
+                            Delete
+                        </button>
+                    </form>
+                </td>
+                <td>
+                    <a asp-action="CourseIndex" asp-route-groupId="@item.Id" class="btn btn-green btn-sm btn-icon icon-left">
+                        <i class="entypo-bag"></i>
+                        View Courses
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

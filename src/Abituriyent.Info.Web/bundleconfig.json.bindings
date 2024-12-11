@@ -1,0 +1,1 @@
+﻿///<binding AfterBuild='Update all files' Clean='wwwroot/css/main_css_bundle.css' />

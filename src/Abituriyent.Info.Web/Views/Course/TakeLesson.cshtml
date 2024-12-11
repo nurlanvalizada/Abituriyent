@@ -1,0 +1,88 @@
+﻿@model Abituriyent.Info.Web.Models.ViewModels.CourseLessonViewModel
+@{
+    ViewData["Title"] = Model.Name + " dərsi";
+}
+<div>
+    <section class="grey page-title">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-left">
+                    <h1>@Model.Name dərsi</h1>
+                </div><!-- end col -->
+                <div class="col-md-6 text-right">
+                    <div class="bread">
+                        <ol class="breadcrumb">
+                            <li>
+                                <a href="#">Course</a>
+                            </li>
+                            <li class="active">TakeLesson</li>
+                        </ol>
+                    </div><!-- end bread -->
+                </div><!-- end col -->
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </section><!-- end section -->
+
+    <section class="white section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-title text-center">
+                        <h4>@Model.Name</h4>
+                        <p>Dərslər təcrübəli müəllimlər tərəfinden keçirilir ve keyfiyyətə zəmanət verilir ...</p>
+                    </div>
+                </div><!-- end col -->
+            </div><!-- end row -->
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <iframe style="width: 70%; height: 380px" src="@Model.VideoUrl" frameborder="0" allowfullscreen></iframe>
+                </div><!-- end col -->
+            </div><!-- end row -->
+            <!-- Modal Lesson Tests Already Taken-->
+            <div class="modal fade" id="modal-lessonTaken" style="z-index: 10000;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Diqqet!</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            Siz bu dersin testlerini artiq cavablandirmisiniz..
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-wrapper text-center">
+                <p>
+                    <b>Tövsiyyələr:</b> Əvvəlcə dərsin videosunu diqqətlə izləməyə çalışın, daha sonra dərsin PDF faylını oxuyun. <br/>
+                    Dərsi tam başa düşdüyünüzə əmin olduqdan sonra testləri həll etməyə çalışın ...
+                </p>
+                <a target="_blank" asp-controller="Course" asp-action="ReadPdf" asp-route-id="@Model.Id" class="btn btn-primary">
+                    <i class="fa fa-download"></i>PDF oxu
+                </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="#" id="startTest" class="btn btn-default border-radius"><i class="fa fa-sign-in"></i> Testə başla</a>
+            </div><!-- end button-wrapper -->
+        </div><!-- end container -->
+        <input type="hidden" name="lessonId" value="@Model.Id"/>
+        <input type="hidden" name="type" value="lesson"/>
+        @await Html.PartialAsync("_Tests", Model.Tests)
+    </section><!-- end section -->
+</div>
+<script>
+    $("#startTest")
+        .click(function() {
+            $("#test").css("display", "block");
+
+            $('html, body')
+                .animate({
+                        scrollTop: $("#test").offset().top
+                    },
+                    500);
+        });
+</script>

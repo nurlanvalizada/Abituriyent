@@ -1,0 +1,79 @@
+@model IEnumerable<Abituriyent.Info.Core.Domain.Course>
+
+@{
+    ViewData["Title"] = "Courses";
+    Layout = "_AdminLayout";
+    var groupId = Context.Request.Query["groupId"].FirstOrDefault();
+}
+
+<h2>Courses</h2>
+<br />
+<p>
+    <a asp-action="CourseCreate" asp-route-groupId="@groupId">Add Course</a>
+</p>
+
+<table class="table table-bordered table-striped datatable" id="table-2">
+    <thead>
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Subject.Name)</th>
+        <th>@Html.DisplayNameFor(model => model.Description)</th>
+        <th>@Html.DisplayNameFor(model => model.ScoreRate)</th>
+        <th>Image</th>
+        <th colspan="3" class="text-center">Actions</th>
+        <th>Related Lessons</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScoreRate)
+            </td>
+            <td>
+                @if (item.ImageUrl != null)
+                {
+                    <a href="@item.ImageUrl" alt="Image">View</a>
+                }
+            </td>
+            <td>
+                <a asp-action="CourseEdit" asp-route-id="@item.Id" class="btn btn-default btn-sm btn-icon icon-left">
+                    <i class="entypo-pencil"></i>
+                    Edit
+                </a>
+            </td>
+            <td>
+                <a asp-action="CourseDetails" asp-route-id="@item.Id" class="btn btn-info btn-sm btn-icon icon-left">
+                    <i class="entypo-info"></i>
+                    Details
+                </a>
+            </td>
+            <td>
+                <form asp-controller="Admin" asp-action="CourseDelete" method="post">
+                    <input type="hidden" name="id" value="@item.Id" />
+                    <button onclick="return confirm('Are you sure you want to delete this item ?')" type="submit" class="btn btn-danger btn-sm btn-icon icon-left">
+                        <i class="entypo-cancel"></i>
+                        Delete
+                    </button>
+                </form>
+            </td>
+            <td>
+                <a asp-action="CourseLessonIndex" asp-route-courseId="@item.Id" class="btn btn-green btn-sm btn-icon icon-left">
+                    <i class="entypo-bag"></i>
+                    View Lessons
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+<div>
+    <a asp-action="GroupIndex">Back to Groups</a>
+</div>

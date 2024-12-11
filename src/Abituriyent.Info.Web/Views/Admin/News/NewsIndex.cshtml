@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Abituriyent.Info.Core.Domain.News>
+
+@{
+    ViewData["Title"] = "News";
+    Layout = "_AdminLayout";
+}
+
+<h2>News</h2>
+<br />
+<p>
+    <a asp-action="NewsCreate">Add News</a>
+</p>
+
+<table class="table table-bordered table-striped datatable" id="table-2">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Title)</th>
+            <th>@Html.DisplayNameFor(model => model.ShortContent)</th>
+            <th>@Html.DisplayNameFor(model => model.PublishDate)</th>
+            <th>Image Header</th>
+            <th colspan="3" class="text-center">Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.Raw(item.Title)
+                </td>
+                <td>
+                    @Html.Raw(item.ShortContent)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PublishDate)
+                </td>
+                <td>
+                    @if (item.ImageUrl != null)
+                    {
+                        <a href="@item.ImageUrl" alt="Image">View Image</a>
+                    }
+                </td>
+                <td>
+                    <a asp-action="NewsEdit" asp-route-id="@item.Id" class="btn btn-default btn-sm btn-icon icon-left">
+                        <i class="entypo-pencil"></i>
+                        Edit
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="NewsDetails" asp-route-id="@item.Id" class="btn btn-info btn-sm btn-icon icon-left">
+                        <i class="entypo-info"></i>
+                        Details
+                    </a>
+                </td>
+                <td>
+                    <form asp-controller="Admin" asp-action="NewsDelete" method="post">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <button onclick="return confirm('Are you sure you want to delete this item ?')" type="submit" class="btn btn-danger btn-sm btn-icon icon-left">
+                            <i class="entypo-cancel"></i>
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

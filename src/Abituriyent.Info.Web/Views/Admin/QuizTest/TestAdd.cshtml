@@ -1,0 +1,60 @@
+@model Abituriyent.Info.Web.Models.AdminViewModels.CourseSubjectViewModel
+
+@{
+    ViewData["Title"] = "Add Quiz Tests";
+    Layout = "_AdminLayout";
+}
+
+<h2>Select Quiz Tests from All Test List </h2>
+@if (Model.CourseLessonTests.Any())
+{
+    <form asp-action="TestAdd" enctype="multipart/form-data">
+        <div class="row">
+            <div id="course-content" class="col-md-10">
+                <div class="course-description">
+                    <input type="hidden" asp-for="CourseLesson.Id" />
+                    @foreach (var test in Model.CourseLessonTests)
+                    {
+                        var testId = "optionsRadios" + test.Id;
+                        <div class="quiz-wrapper">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input id="address@(test.Id)" type="checkbox"
+                                           name="TestIds"
+                                           value="@test.Id"
+                                           @(Model.TestIds.Contains(test.Id) ? "checked" : "") />
+                                    <div id="@testId" class="panel panel-primary">
+                                        <div class="panel-body">
+                                            <div class="col-md-12">
+                                                <p>@Html.Raw(test.Test.Content)</p>
+                                                @foreach (var answer in test.Test.Answers)
+                                                {
+                                                    <div class="radio">
+                                                        <label class="answer">
+                                                            <input style="border: 2px solid black" checked="@(answer.Id.Equals(test.Test.TestAnswer.AnswerId))" name="@testId" value="@answer.Id" type="radio" disabled> @Html.Raw(answer.Text)
+                                                        </label>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div><!-- end body -->
+                                    </div><!-- end panel -->
+                                </div><!-- end col -->
+                            </div><!-- end row -->
+                        </div>
+                        <!-- end quiz wrapper -->
+                    }
+                </div><!-- end desc -->
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <input type="submit" value="Add" class="btn btn-default" />
+                    </div>
+                </div>
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </form>
+}
+else
+{
+    <br />
+    <h4>No test found to add</h4>
+}

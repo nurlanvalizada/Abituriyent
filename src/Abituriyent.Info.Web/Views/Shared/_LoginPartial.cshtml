@@ -1,0 +1,58 @@
+﻿@using Abituriyent.Info.Core.Domain
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@if (SignInManager.IsSignedIn(User))
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown ttmenu-half">
+
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle" title="Hesab əməliyyatları">
+                @UserManager.GetUserName(User) <b class="fa fa-angle-down"></b>
+            </a>
+            <form asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm">
+                <ul class="dropdown-menu">
+                    <li>
+                        <div class="ttmenu-content">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="box">
+                                        <ul>
+                                            <li>
+                                                <a asp-controller="Account" asp-action="Edit">Profili Redaktə Et</a>
+                                            </li>
+                                            <li>
+                                                <a asp-controller="Manage" asp-action="Index">Hesabı İdarə Et</a>
+                                            </li>
+                                           
+                                            <li>
+                                                <a asp-controller="Account" asp-action="Rating">Reytinq</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" style="cursor: pointer;" onclick="document.getElementById('logoutForm').submit();">Hesabdan Çıxış</a>
+                                            </li>
+                                            @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
+                                            {
+                                                <li>
+                                                    <a asp-controller="Admin" asp-action="Index"><b>Admin Panelə Keçid</b></a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div><!-- end box -->
+                                </div><!-- end col -->
+                            </div><!-- end row -->
+
+                        </div><!-- end ttmenu-content -->
+                    </li>
+                </ul>
+            </form>
+        </li><!-- end mega menu -->
+    </ul>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <a class="btn btn-primary" asp-controller="Account" asp-action="Register"><i class="fa fa-sign-in"></i>Qeydiyyatdan Keç</a>
+        </li>
+    </ul>
+}

@@ -1,0 +1,39 @@
+﻿[
+  {
+    "outputFileName": "wwwroot/css/main_css_bundle.min.css",
+    "inputFiles": [
+      "wwwroot/css/animate.css",
+      "wwwroot/css/menu.css",
+      "wwwroot/css/carousel.css",
+      "wwwroot/css/bbpress.css",
+      "wwwroot/css/style.css",
+      "wwwroot/css/bxslider.css",
+      "wwwroot/js/dropzone/dropzone.css",
+      "wwwroot/js/dropzone/neon-forms.css",
+      "wwwroot/rs-plugin/css/settings.css",
+      "wwwroot/fonts/font-awesome-4.3.0/css/font-awesome.min.css",
+      "wwwroot//css/star-rating.min.css"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/main-js-bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/retina.js",
+      "wwwroot/js/wow.js",
+      "wwwroot/js/carousel.js",
+      "wwwroot/js/custom.js",
+      "wwwroot/js/mycustomscripts.js",
+      "wwwroot/js/menu-active-colors.js",
+      "wwwroot/js/dropzone/dropzone.js",
+      "wwwroot/js/dropzone/fileinput.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  }
+]

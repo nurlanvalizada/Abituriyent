@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "404";
+}
+<section class="grey section">
+    <div class="container">
+        <div class="row">
+            <div id="content" class="col-md-12 col-sm-12 col-xs-12">
+                <div class="blog-wrapper">
+                    <div class="row second-bread">
+                        <div class="col-md-6 text-left">
+                            <h1>Axtardığınız səhifə tapılmadı</h1>
+                        </div><!-- end col -->
+                        <div class="col-md-6 text-right">
+                            <div class="bread">
+                                <ol class="breadcrumb">
+                                    <li>Home</li>
+                                    <li><a href="#">Error</a></li>
+                                    <li class="active">404</li>
+                                </ol>
+                            </div><!-- end bread -->
+                        </div><!-- end col -->
+                    </div><!-- end row -->
+                </div><!-- end blog-wrapper -->
+                <div class="blog-wrapper">
+                    <div class="blog-desc notfound text-center">
+
+                        <h3>404</h3>
+                        <p class="lead">Axtardığınız səhifə mövcud deyil. Aşağıdakı keçid vasitəsi ilə əsas səhifəyə qayıda və<br/> buradan istədiyiniz səhifəyə keçid edə bilərsiniz.
+                        </p>
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-default">Ana səhifəyə qayıt</a>
+                        <hr class="invis">
+                    </div><!-- end desc -->
+                </div><!-- end blog-wrapper -->
+            </div><!-- end content -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section><!-- end section -->

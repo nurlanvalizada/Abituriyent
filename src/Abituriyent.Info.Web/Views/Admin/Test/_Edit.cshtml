@@ -1,0 +1,63 @@
+@model Abituriyent.Info.Web.Models.AdminViewModels.TestViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<p>Content</p>
+<div class="panel-body" style="border: 1px solid transparent; border-radius: 3px;border-color: #ebebeb;margin-bottom: 1%;">
+    <div id="content" class="col-md-9">
+        @Html.Raw(Model.Test.Test.Content)
+    </div>
+    <div class="col-md-offset-3">
+        <input hidden name="Test.Test.Content" id="testcontent" value="@Model.Test.Test.Content" />
+        <input hidden name="Test.Test.Status" value="true" />
+        <input hidden name="Test.Test.TestType" value="@Model.Test.Test.TestType" />
+        <input hidden name="Test.Test.Id" value="@Model.Test.Test.Id" />
+        <a href="#" onclick="content()" class="btn btn-default btn-sm btn-icon icon-left pull-right" id="edit">
+            <i class="entypo-pencil"></i>
+            Edit
+        </a>
+        <a href="#" onclick="save()" class="btn btn-default btn-sm btn-icon icon-left pull-right" id="save" style="display:none">
+            <i class="entypo-pencil"></i>
+            Save
+        </a>
+
+    </div>
+</div>
+<p>Answers</p>
+<div class="panel-body" style="border: 1px solid transparent;border-radius: 3px;border-color: #ebebeb;margin-bottom: 1%;">
+    @if (Model.Answers!=null && Model.Answers.Count!=0)
+    {
+        var number = 0;
+        foreach (var answer in Model.Answers)
+        {
+            var answerId = "answer" + number;
+            var answerContentId = "answerContent" + number;
+            <div class="panel-body" style="border: 1px solid transparent;border-radius: 3px;border-color: #ebebeb;margin-bottom: 1%;">
+                <input hidden asp-for="@Model.Answers[number].Text" id="@answerId" value="@answer.Text" />
+                <div id="@answerContentId" class="col-md-9">
+                    <label class="answer">
+                        <input style="border: 2px solid black"  asp-for="@Model.CorrectAnswerId" value="@number" type="radio"> @Html.Raw(answer.Text)
+                    </label>
+                </div>
+                <a onclick="contentAnswer(@number)" class="btn btn-default btn-sm btn-icon icon-left pull-right" id="edit-@number">
+                    <i class="entypo-pencil"></i>
+                    Edit
+                </a>
+                <a href="#" onclick="saveAnswer('@number')" class="btn btn-default btn-sm btn-icon icon-left pull-right" id="save-@number" style="display:none">
+                    <i class="entypo-pencil"></i>
+                    Save
+                </a>
+                <a href="#" onclick="deleteAnswer('@number')" class="btn btn-green btn-sm btn-icon icon-left pull-right">
+                    Delete
+                    <i class="entypo-trash"></i>
+                </a>
+            </div>
+            number++;
+        }}
+    <a href="#" onclick="add(@Model.Answers.Count)" class="btn btn-green btn-sm btn-icon icon-left pull-right">
+        Add
+        <i class="entypo-list-add"></i>
+    </a>
+</div>
+<input type="submit" value="Save" class="btn btn-default" />

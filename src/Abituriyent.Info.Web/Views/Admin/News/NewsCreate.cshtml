@@ -1,0 +1,81 @@
+﻿@model Abituriyent.Info.Core.Domain.News
+
+@{
+    ViewData["Title"] = "Create News";
+    Layout = "_AdminLayout";
+}
+
+<h2>Create</h2>
+
+<form id="newsCreate" asp-action="NewsCreate" enctype="multipart/form-data">
+    <div class="form-horizontal">
+        <h4>News</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Title" />
+        <input type="hidden" asp-for="Content" />
+        <input type="hidden" asp-for="ShortContent" />
+        <div class="form-group">
+            <label asp-for="Title" class="col-md-2 control-label"></label>
+            <div class="col-md-10" id="titleWrapper">
+                <div id="editorTitle"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ShortContent" class="col-md-2 control-label"> </label>
+            <div class="col-md-10" id="shortContentWrapper">
+                <div id="editorShortContent"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Content" class="col-md-2 control-label"> </label>
+            <div class="col-md-10" id="contentWrapper">
+                <div id="editorContent"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Image Header</label>
+            <div class="col-md-10">
+                <input id="imageFile" name="imageFile" type="file" class="form-control file2 inline btn btn-primary" data-label="<i class='glyphicon glyphicon-file'></i>Select Image(1000x579)" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" onclick="editNews()" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="NewsIndex">Back to List</a>
+</div>
+
+<script src="~/admin/assets/js/ckeditor/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('editorTitle', {
+        filebrowserUploadUrl: '/Admin/UploadNewsImage',
+        filebrowserWindowWidth: '640',
+        filebrowserWindowHeight: '480'
+    });
+    CKEDITOR.replace('editorContent', {
+        filebrowserUploadUrl: '/Admin/UploadNewsImage',
+        filebrowserWindowWidth: '640',
+        filebrowserWindowHeight: '480'
+    });
+    CKEDITOR.replace('editorShortContent', {
+        filebrowserUploadUrl: '/Admin/UploadNewsImage',
+        filebrowserWindowWidth: '640',
+        filebrowserWindowHeight: '480'
+    });
+
+    function editNews() {
+        var content = $("#contentWrapper").contents().find("iframe").contents().find('body').html();
+        var shortContent = $("#shortContentWrapper").contents().find("iframe").contents().find('body').html();
+        var title = $("#titleWrapper").contents().find("iframe").contents().find('body').html();
+        $("#Title").val(title);
+        $("#Content").val(content);
+        $("#ShortContent").val(shortContent);
+        $("#newsCreate").submit();
+    };
+</script>

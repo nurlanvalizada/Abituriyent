@@ -1,0 +1,178 @@
+﻿@model Abituriyent.Info.Web.Models.AccountViewModels.RegisterViewModel
+@{
+    ViewData["Title"] = "Qeydiyyat";
+}
+<section class="grey page-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-left">
+                <h1>Qeydiyyat</h1>
+            </div><!-- end col -->
+            <div class="col-md-6 text-right">
+                <div class="bread">
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="#">Account</a>
+                        </li>
+                        <li class="active">Register</li>
+                    </ol>
+                </div><!-- end bread -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section><!-- end section -->
+
+<form asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" class="form-horizontal" method="post">
+    <section class="white section">
+        <div class="container">
+            <input type="hidden" name="requestOrigin" value="@ViewBag.RequestOrigin"/>
+            <div class="row panel-login">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="col-lg-12">
+                    <div class="col-lg-5">
+                        <div class="form-group">
+                            <input asp-for="Username" class="form-control" placeholder="İstifadəçi Adı *">
+                            <span asp-validation-for="Username" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="Email" class="form-control" placeholder="Email Ünvanı *"/>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="Password" class="form-control" placeholder="Şifrə *"/>
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="ConfirmPassword" class="form-control" placeholder="Şifrənin Təsdiqi *"/>
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="FirstName" class="form-control" placeholder="Ad *"/>
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="LastName" class="form-control" placeholder="Soyad *"/>
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="FatherName" class="form-control" placeholder="Ata Adı *"/>
+                            <span asp-validation-for="FatherName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="Address" class="form-control" placeholder="Ünvan *"/>
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        @*Register a free account. We all are trying to do the best for you.*@
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="form-group">
+                            <input asp-for="HomePhone" class="form-control" placeholder="Ev Telefonu"/>
+                            <span asp-validation-for="HomePhone" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="MobilePhone" class="form-control" placeholder="Mobil Telefon *"/>
+                            <span asp-validation-for="MobilePhone" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <div style="width: 22%; float: left;">
+                                <span style="line-height: 3">@Html.DisplayNameFor(m => m.Gender) *</span>
+                            </div>
+                            <div style="width: 78%; float: left;">
+                                <div style="width: 34%; float: left; padding-top: 3%"><input asp-for="Gender" type="radio" value="1"/> Kişi
+                                </div>
+                                <div style="width: 25%; float: left; padding-top: 3%"><input asp-for="Gender" type="radio" value="2"/> Qadın
+                                </div>
+                                <div style="clear: both;"></div>
+                                <span asp-validation-for="Gender" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div style="width: 22%; float: left;">
+                                <span style="line-height: 3">Doğum tarixi *</span>
+                            </div>
+                            <div style="width: 27%; float: left;">
+                                <select asp-for="Day" asp-items="@ViewBag.Days" class="form-control" style="width: 80%;">
+                                    <option>Gün</option>
+                                </select>
+                                <span asp-validation-for="Day" class="text-danger"></span>
+                            </div>
+                            <div style="width: 28%; float: left;">
+                                <select asp-for="Month" asp-items="@ViewBag.Months" class="form-control" style="width: 90%;">
+                                    <option>Ay</option>
+                                </select>
+                                <span asp-validation-for="Month" class="text-danger"></span>
+                            </div>
+                            <div style="width: 23%; float: left;">
+                                <select asp-for="Year" asp-items="@ViewBag.Years" class="form-control">
+                                    <option>İl</option>
+                                </select>
+                                <span asp-validation-for="Year" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <select asp-for="CityId" asp-items="@Model.Cities" class="form-control">
+                                <option>Şəhər Seç *</option>
+                            </select>
+                            <span asp-validation-for="CityId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <select asp-for="SchoolId" asp-items="@Model.Schools" class="form-control">
+                                <option>Məktəb Seç *</option>
+                            </select>
+                            <span asp-validation-for="SchoolId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <select asp-for="GroupId" asp-items="@Model.Groups" class="form-control">
+                                <option>Qrup Seç *</option>
+                            </select>
+                            <span asp-validation-for="GroupId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <input type="submit" class="form-control btn btn-default btn-block" value="Hesab Yarat">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+
+    @section Scripts {
+        @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+        <script>
+            $("#SchoolId").prop("disabled", true);
+            $("#CityId")
+                .change(function () {
+                    var url = '/api/MyApi/GetSchools/?cityId=' + this.value;
+                    var options = $("#SchoolId");
+                    options.empty();
+                    options.prop("disabled", true);
+                    options.append($("<option />").text("Məktəb Seç *"));
+                    $.ajax({
+                        url: url,
+                        type: 'GET',
+                        success: function (data) {
+                            if (data.length>0) {
+                                $.each(data,
+                                    function () {
+                                        options.append($("<option />").val(this.value).text(this.text));
+                                    });
+                                options.prop("disabled", false);
+                            }
+                        }
+                    });
+                });
+
+            $(document).ready(function () {
+                $('#MobilePhone, #HomePhone').mask('(000) 000-00-00');
+            });
+
+        </script>
+<script src="~/lib/jquery-mask-plugin/src/jquery.mask.js"></script>
+    }

@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Abituriyent.Info.Web.Models.ViewModels.ExamTestViewModel>
+@{
+    ViewData["Title"] = "İmtahan nəticəsi";
+}
+<section class="grey page-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-left">
+                <h1>Course Quiz Page</h1>
+            </div><!-- end col -->
+            <div class="col-md-6 text-right">
+                <div class="bread">
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="#">Exam</a>
+                        </li>
+                        <li class="active">ViewExam</li>
+                    </ol>
+                </div><!-- end bread -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section><!-- end section -->
+
+<section class="white section">
+    <input type="hidden" name="type" value="exam" />
+    <input type="hidden" name="examId" value="@ViewBag.ExamId" />
+    @await Html.PartialAsync("_ViewExamTests", Model)
+</section><!-- end section -->

@@ -1,0 +1,43 @@
+﻿@using Abituriyent.Info.Core.Models
+@model IEnumerable<Abituriyent.Info.Web.Models.ViewModels.CourseLessonViewModel>
+
+<div class="course-table">
+    <h4>Kursun Dərsləri</h4>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Dərsin Adı</th>
+            <th>Dərsin Statusu</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var lesson in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-controller="Course" asp-action="TakeLesson" asp-route-id="@lesson.Id">@lesson.Name</a>
+                </td>
+
+                @switch (lesson.Status)
+                {
+                    case LessonStatus.Complete:
+                        <td>
+                            <i class="fa fa-check" title="Bitmiş"></i>
+                        </td>
+                        break;
+                    case LessonStatus.NotStarted:
+                        <td>
+                            <i class="fa fa-close" title="Başlanılmamış"></i>
+                        </td>
+                        break;
+                    case LessonStatus.InProgress:
+                        <td>
+                            <i class="fa fa-play" title="Davam Etməkdə"></i>
+                        </td>
+                        break;
+                }
+            </tr>
+        }
+        </tbody>
+    </table>
+</div><!-- end course-table -->

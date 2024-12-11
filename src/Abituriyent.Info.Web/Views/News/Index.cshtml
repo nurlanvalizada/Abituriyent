@@ -1,0 +1,175 @@
+﻿@model IEnumerable<Abituriyent.Info.Core.Domain.News>
+@{
+    ViewData["Title"] = "Xəbərlər";
+    var months = new Dictionary<int, string>
+    {
+        { 1,"Yanvar"},
+        { 2,"Fevral"},
+        { 3,"Mart"},
+        { 4,"Aprel"},
+        { 5,"May"},
+        { 6,"İyun"},
+        { 7,"İyul"},
+        { 8,"Avqust"},
+        { 9,"Sentyabr"},
+        { 10,"Oktyabr"},
+        { 11,"Noyabr"},
+        { 12,"Dekabr"}
+    };
+}
+<div id="fb-root"></div>
+<section class="grey section">
+    <div class="container">
+        <div class="row">
+            <div id="content" class="col-md-8 col-sm-8 col-xs-12">
+                <div class="blog-wrapper">
+                    <div class="row second-bread">
+                        <div class="col-md-6 text-left">
+                            <h1>Xəbərlər</h1>
+                        </div><!-- end col -->
+                        <div class="col-md-6 text-right">
+                            <div class="bread">
+                                <ol class="breadcrumb">
+                                    <li>
+                                        <a href="#">Home</a>
+                                    </li>
+                                    <li class="active">News</li>
+                                </ol>
+                            </div><!-- end bread -->
+                        </div><!-- end col -->
+                    </div><!-- end row -->
+                </div><!-- end blog-wrapper -->
+                @if (Model.Any())
+                {
+                    foreach (var news in Model)
+                    {
+                        <div class="blog-wrapper">
+                            <div class="blog-title">
+                                <h2>
+                                    <a asp-controller="News" asp-action="ReadDetailed" asp-route-id="1" title="">@Html.Raw(news.Title)</a>
+                                </h2>
+                                <div class="post-meta">
+                                    <span>
+                                        <i class="fa fa-user"></i>
+                                        <a href="#">@news.Admin.Person.FirstName @news.Admin.Person.LastName tərəfindən</a>
+                                    </span>
+                                </div>
+                            </div><!-- end blog-title -->
+                            <div class="blog-image">
+                                <a asp-controller="News" asp-action="ReadDetailed" asp-route-id="@news.Id" title="">
+                                    @if (news.ImageUrl != null)
+                                    {
+                                        <img src="@news.ImageUrl" alt="" class="img-responsive">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/upload/blog_01.jpg" alt="" class="img-responsive">
+                                    }
+                                </a>
+                            </div><!-- end image -->
+                            <div class="blog-desc">
+                                <div class="post-date">
+                                    <span class="day">@news.PublishDate.Day</span>
+                                    <span class="month">@months[news.PublishDate.Month]</span>
+                                </div>
+                                 <p>@Html.Raw(news.ShortContent)</p>
+                                  <a asp-controller="News" asp-action="ReadDetailed" asp-route-id="@news.Id" class="readmore">Daha Ətraflı</a>
+                            </div><!-- end desc -->
+                        </div>
+                        <!-- end blog-wrapper -->
+                    }
+                }
+                else
+                {
+                    <div class="blog-wrapper">
+                        <div class="blog-title">
+                            <h3>
+                                Heç bir xəbər tapılmadı ...
+                            </h3>
+                        </div>
+                    </div>
+                }
+
+                <hr class="invis">
+                <nav class="text-center">
+                    <ul class="pagination">
+                        @{
+                            var pageParams = (Tuple<int, int, int, int>) ViewBag.PageParams;
+                        }
+
+                        @if (pageParams.Item3 != 1)
+                        {
+                            <li>
+                                <a asp-controller="News" asp-action="Index" asp-route-pageNumber="@(pageParams.Item3 - 1)" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                        }
+
+                        @for (int i = pageParams.Item1; i <= pageParams.Item2; i++)
+                        {
+                            if (i == pageParams.Item3)
+                            {
+                                <li>
+                                    <a style="background-color: #e34b11; border-color: #e34b11;" asp-controller="News" asp-action="Index" asp-route-pageNumber="@i">@i</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a asp-controller="News" asp-action="Index" asp-route-pageNumber="@i">@i</a>
+                                </li>
+                            }
+                        }
+                        @if (pageParams.Item3 != pageParams.Item4 && Model.Any())
+                        {
+                            <li>
+                                <a asp-controller="News" asp-action="Index" asp-route-pageNumber="@(pageParams.Item3 + 1)" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
+                </nav>
+
+            </div><!-- end content -->
+            <div id="sidebar" class="col-md-4 col-sm-4 col-xs-12">
+                <div class="widget">
+                    <div class="searchform">
+                        <p>Hansı xəbərləri axtarırsınız ?</p>
+                        <form asp-controller="News" asp-action="Index" method="get">
+                            <input type="text" name="searchPattern" class="form-control" placeholder="Axtarış sözünü daxil edin" value="@ViewBag.searchPattern">
+                        </form>
+                    </div><!-- end newsletter -->
+                </div><!-- end widget -->
+                <div class="widget">
+                    <div class="widget-title">
+                        <h4>Xəbərlərə abunə olun</h4>
+                        <hr>
+                    </div>
+                    <div class="newsletter">
+                        <p>Həftəlik xəbərlərə abunə olun və məlumatsız qalmayın.</p>
+                        <form>
+                            <input type="text" class="form-control" placeholder="Email ünvanınızı daxil edin">
+                            <input type="button" value="İndi abunə ol!" class="btn btn-primary btn-block"/>
+                        </form>
+                    </div><!-- end newsletter -->
+                </div><!-- end widget -->
+                <div class="widget">
+                    <div class="widget-title">
+                        <h4>Bizi Facebook-da izləyin</h4>
+                        <hr>
+                    </div>
+                    <div>
+                        <div class="fb-page" data-href="https://www.facebook.com/Magistratura.az.T.M" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                            <blockquote cite="https://www.facebook.com/Magistratura.az.T.M" class="fb-xfbml-parse-ignore">
+                                <a href="https://www.facebook.com/Magistratura.az.T.M">magistratura.az</a>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div><!-- end widget -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section><!-- end section -->

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Abituriyent.Info.Web.Models.ViewModels.CourseViewModel>
+@{
+    ViewData["Title"] = "Kurslar";
+}
+<section class="grey page-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-left">
+                <h1>Kurslar</h1>
+            </div><!-- end col -->
+            <div class="col-md-6 text-right">
+                <div class="bread">
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="#">Course</a>
+                        </li>
+                        <li class="active">Index</li>
+                    </ol>
+                </div><!-- end bread -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section><!-- end section -->
+<section class="white section">
+    <div class="container">
+        <div class="row course-list">
+            @foreach (var course in Model)
+            {
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="shop-item-list entry">
+                        <div class="">
+                            @if (course.ImageUrl != null)
+                            {
+                                <img src="@course.ImageUrl" alt="">
+                            }
+                            else
+                            {
+                                <img src="~/upload/course_01.png" alt="">
+                            }
+                            <div class="magnifier">
+                            </div>
+                        </div>
+                        <div class="shop-item-title clearfix">
+                            <h4>
+                                <a asp-controller="Course" asp-action="Single" asp-route-id="@course.Id">@course.Name</a>
+                            </h4>
+                            <div class="shopmeta">
+                                <span class="pull-left">@course.StudentCount Abituriyent</span>
+                                <div class="rating pull-right">
+                                    @for (var i = 0; i < course.AverageRating; i++)
+                                    {
+                                        <i class="fa fa-star"></i>
+                                    }
+                                    @for (var j = 0; j < 5 - course.AverageRating; j++)
+                                    {
+                                        <i class="fa fa-star-o"></i>
+                                    }
+                                </div><!-- end rating -->
+                            </div><!-- end shop-meta -->
+                        </div><!-- end shop-item-title -->
+                        <div class="visible-buttons">
+                            <a title="Read More" asp-controller="Course" asp-action="Single" asp-route-id="@course.Id">
+                                <span class="fa fa-search"></span>
+                            </a>
+                        </div><!-- end buttons -->
+                    </div><!-- end relative -->
+                </div><!-- end col -->
+            }
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section><!-- end section -->

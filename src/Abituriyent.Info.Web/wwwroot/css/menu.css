@@ -1,0 +1,567 @@
+#vertical .navbar-brand {
+    width: 100%;
+}
+#vertical .ttmenu-full.open {
+    max-width: 100%;
+    width: 100% !important;
+    position: absolute;
+}
+#vertical .nav-pills > li > a {
+    font-size:12px;
+}
+#vertical .navbar-default,
+#vertical .navbar-default .nav,
+#vertical .navbar-default .collapse,
+#vertical .navbar-default .dropup,
+#vertical .navbar-default .dropdown {
+    position: static;
+    width: 100% !important;
+    left:0;
+}
+#vertical .navbar-collapse {
+    padding: 0
+}
+#vertical .navbar-default .navbar-nav li .vertical-menu {
+    opacity: 1;
+    position: absolute;
+    left: 277px !important;
+    right: 0 !important;
+    top:auto;
+    margin-top: -50px !important;
+    width: 848px !important;
+    padding:0;
+}
+
+#vertical .navbar-default .navbar-nav li .vertical-dropdown-menu {
+    opacity: 1;
+    position: absolute;
+    left: 277px !important;
+    right: 0 !important;
+    top:auto;
+    margin-top: -50px !important;
+    max-width: 200px;
+    padding:0;
+}
+#vertical .navbar-default .navbar-nav li .dropdown {
+    width: 100% !important
+}
+#vertical .navbar-default .navbar-nav li ul {
+    width: 100% !important
+}
+#vertical .dropdown-menu, 
+#vertical .navbar-default .ttmenu-content {
+    padding:20px;
+}
+#vertical .nav-pills {
+    max-width: 250px;
+}
+#vertical .dropme:after{
+    content: "\f105";
+    color:#1a1a1a;
+    position: absolute;
+    right: 20px;
+    padding-left: 5px;
+    font-family: 'FontAwesome';
+}
+
+
+/* MENU DEFAULT */
+
+.nopadding {
+    padding:5px !important;
+}
+.ttmenu .ttmenu-half .dropdown-menu {
+    max-width: 500px !important;
+}
+.ttmenu .ttmenu-half .box {
+    min-width: 200px;
+}
+.ttmenu {
+    margin-bottom: 0;
+}
+.ttmenu .navbar-default {
+	border:0;
+    margin-bottom: 0;
+    width: 100% !important;
+    border-radius: 0;
+}
+.ttmenu .navbar-default .dropdown-menu {
+    background: rgb(255,255,255); /* Old browsers */
+    box-shadow:none !important;
+	border:1px solid #ededed;
+}
+.ttmenu .navbar-default .dropdown-menu,
+.ttmenu .navbar-default .dropdown-menu li a {
+    color:#282828;
+	list-style:none;
+    background-color: transparent !important;
+}
+.white-style .navbar-brand i {
+    color:#ffffff !important;
+}
+.ttmenu .navbar-default .navbar-toggle span {
+	color:#fff !important;
+}
+.ttmenu .navbar-default .navbar-toggle {
+	border-color:#111;
+	color:#fff !important;
+	margin-top:8px;
+}
+.ttmenu .navbar ul {
+	padding-left:0;
+	list-style:none;
+}
+.ttmenu .navbar-brand {
+    color: #fff !important;
+    float: left;
+    font-size: 20px;
+    height:52px;
+	background:none;
+    line-height: 38px;
+    position: relative;
+    text-align: center;
+    top: 0;
+    width:65px;
+}
+.ttmenu .navbar-collapse {
+    border-bottom: 0  !important;
+}
+.ttmenu .navbar-default .navbar-nav > li > .dropdown-menu {
+    margin-top:0;
+}
+.ttmenu .navbar-default .nav,
+.ttmenu .navbar-default .collapse,
+.ttmenu .navbar-default .dropup,
+.ttmenu .navbar-default .dropdown {
+    position: static;
+}
+.ttmenu .navbar-default .container {
+    position: relative;
+}
+.ttmenu .navbar-default .dropdown-menu {
+    left: auto;
+    background-color: #ffffff !important
+}
+.ttmenu-content .box li,
+.ttmenu .navbar-default .dropdown-menu li a {
+	text-decoration:none !important;
+}
+.ttmenu .navbar-default .dropdown-menu,
+.ttmenu-content .dropdown-menu {
+	padding:0 !important
+}
+.navbar-default .navbar-nav > li > a {
+    padding-bottom: 15px;
+    padding-top: 15px;
+	font-size: 13px;
+    letter-spacing: 1px;
+    font-style: normal;
+	color:#1a1a1a ;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.navbar-default .dropdown-menu li {
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    color: #282828;
+    font-size: 13px;
+    font-weight: 400;
+    padding:10px 10px 10px 5px !important;
+    position: relative;
+	text-decoration:none;
+    text-transform: none;
+}
+.ttmenu .navbar-default li .widget a {
+	padding:0 !important;
+}
+.ttmenu-content .box li a{
+    color: #282828;
+    font-size: 13px;
+	border-bottom:none;
+	border-bottom:0 !important;
+    font-weight: 400;
+    padding: 14px 0 12px 0 !important;
+    position: relative;
+	text-decoration:none;
+    text-transform: none;
+}
+.ttmenu .dropdown-menu,
+.ttmenu .navbar-default .ttmenu-content {
+    padding:20px 30px;
+}
+.nopaddingright {
+    padding-right: 0 !important;
+}
+.ttmenu .navbar-default .ttmenu-content .tab-pane.bg1 {
+    background-position: right bottom;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+}
+.ttmenu .navbar-default .ttmenu-full .dropdown-menu {
+    left: 0;
+    right: 0;
+}
+
+.ttmenu-full .dropdown-menu li {
+    padding-left: 10px !important;
+}
+.ttmenu .nav li span.label {
+	color:#fff !important;
+   margin-left: 5px;
+    margin-top: 2px !important;
+    padding: 5px 10px;
+}
+.ttmenu .navbar-default .navbar-nav > .active > a, 
+.ttmenu .navbar-default .navbar-nav > .active > a:hover, 
+.ttmenu .navbar-default .navbar-nav > .active > a:focus {
+    background-color: transparent;
+}
+.ttmenu-content .widget {
+    padding:0;
+    margin:0;
+}
+.ttmenu-content,
+.ttmenu-content .widget,
+.ttmenu-content .widget .thumb {
+    position: relative;
+}
+.ttmenu-content .widget .title h4 {
+    font-size:14px;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+.ttmenu-content .box li {
+    border-bottom: 1px solid #ededed;
+    position: relative;
+	padding:6px 10px 6px 0;
+}
+.ttmenu-content .box li i {
+    right:0;
+    clear: both;
+    top:10px;
+    display:block;
+    position:absolute;
+}
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+    background-color: transparent;
+}
+.dropme:after{
+    content: "\f107";
+    color:#1a1a1a;
+    padding-left: 5px;
+    vertical-align: middle;
+    font-family: 'FontAwesome';
+}
+.dropme-left:after{
+    content: "\f105";
+    color:#1a1a1a;
+    font-family: 'FontAwesome';
+    display:block;
+	right:10px;
+    width:0;
+	position:absolute;
+    height:0;
+	top:13px;
+    margin-top:0;
+    margin-right:10px;
+}
+.navbar-default .dropdown-menu li:last-child,
+.ttmenu-content .box li:last-child {
+    border-bottom:0 solid #fff;
+}
+.navbar-default .dropdown-menu li p {
+    color: #ffffff !important;
+    padding:0 !important;
+    margin:0 !important;
+}
+.box h4 {
+    color:#1a1a1a;
+    font-weight: bold;
+    font-size:14px;
+}
+.box ul li span {
+	float:right;
+	margin-top:6px;
+}
+
+/* MENU SEARCH */
+
+.searchbox {
+    bottom: 0;
+    float: right;
+    line-height: 65px;
+    min-width: 65px;
+    overflow: hidden;
+    position: relative;
+    background: #222;
+    right: 0;
+    width:0;
+    -webkit-transition: width 0.3s;
+    -moz-transition: width 0.3s;
+    -ms-transition: width 0.3s;
+    -o-transition: width 0.3s;
+    transition: width 0.3s;
+}
+.searchbox-input{
+    top:0;
+    right:0;
+    border:0;
+    outline:0;
+    background:#333;
+    width:100%;
+    line-height: 65px;
+    height:65px;
+    margin:0;
+    padding:1px 65px 0px 20px;
+    font-size:12px;
+}
+.searchbox-icon,
+.searchbox-submit{
+    width:65px;
+    height:65px;
+    display:block;
+    position:absolute;
+    top:0;
+    bottom:0;
+    font-size:18px;
+    right:0;
+    padding:0;
+    margin:0;
+    border:0;
+    outline:0;
+    line-height:65px;
+    text-align:center;
+    cursor:pointer;
+    color:#fff;
+    background:#000;
+}
+.ttmenu input[type="search"] {
+    color:#fff;
+}
+.searchbox-open{
+    width:100%;
+}
+
+/* MENU FORM */
+
+.ttmenu .form-control {
+    background-color: #f9f9f9;
+    border: 1px solid #f5f5f5;
+    border-radius: 0;
+    box-shadow: none;
+    font-size:12px;
+    height: 35px;
+    margin-bottom: 10px;
+}
+.ttmenu textarea {
+    height: 140px !important
+}
+
+/* MENU IMAGE HOVER */
+
+#myCarousel img {
+    width: 100%;
+}
+
+/* MENU TABBED */
+
+.nav-pills {
+    margin-top:0;
+}
+.nav-pills > li {
+  float: none;
+  margin-top:0;
+  cursor: pointer;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.nav-pills > li > a {
+  border-radius: 0;
+  cursor: pointer !important;
+  border:0 !important;
+  position: relative;
+  font-weight: bold !important;
+  text-transform: uppercase !important;
+  margin-right: 0;
+  padding:0 !important;
+}
+.nav-pills > li > a:after{
+    content: "\f105";
+    color:#1a1a1a;
+    font-family: 'FontAwesome';
+    display:block;
+    right:10px;
+    width:0;
+    position:absolute;
+    height:0;
+    top:0;
+    margin-top:0;
+    margin-right:10px;
+}
+
+
+/* DARK STYLE */
+
+.dark-style .coldesc {
+    background:#333;
+    color:#fff;
+    margin-bottom: 10px;
+    text-align:center;
+}
+.dark-style .navbar-default .ttmenu-content {
+    border-radius: 0;
+}
+.dark-style .dropdown-menu {
+    background-color:#ffffff !important;
+}
+.dark-style .navbar-default .dropdown-menu li a,
+.dark-style .ttmenu-content .box li a,
+.dark-style .ttmenu-content .box li:before {
+    color:#1a1a1a !important;
+}
+.dark-style .ttmenu-content .box li a:hover,
+.dark-style .ttmenu-content .box li a:focus {
+    background:none !important
+}
+.dark-style .ttmenu-content .box li {
+    border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+.dark-style .navbar-default .dropdown-menu li a:hover,
+.dark-style .navbar-default .dropdown-menu li a:focus {
+    background:#ffffff;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 767px) {
+
+    #vertical .navbar-brand {
+        width: 60px;
+    }
+    #vertical .ttmenu-full.open {
+        max-width: 100%;
+        width: 100% !important;
+        position: relative;
+    }
+    #vertical .navbar-default,
+    #vertical .navbar-default .nav,
+    #vertical .navbar-default .collapse,
+    #vertical .navbar-default .dropup,
+    #vertical .navbar-default .dropdown {
+        position: static;
+        width: 100% !important;
+        left:0;
+    }
+    #vertical .navbar-collapse {
+        padding: 0
+    }
+    #vertical .navbar-default .navbar-nav li .vertical-menu {
+        opacity: 1;
+        position: static;
+        left: 100% !important;
+        right: 100% !important;
+        top:auto;
+        margin-top: 0 !important;
+        max-width: 100%;
+        padding:0;
+    }
+    #vertical .navbar-default .navbar-nav li .vertical-dropdown-menu {
+        opacity: 1;
+        position: static;
+        left: 100% !important;
+        right: 100% !important;
+        top:auto;
+        margin-top: 0 !important;
+        max-width: 100%;
+        padding:0;
+    }
+    #vertical .navbar-collapse {
+        padding:0 0 0 20px;
+    }
+    #vertical .dropdown-menu, 
+    #vertical .navbar-default .ttmenu-content {
+        padding:20px;
+    }
+    #vertical .nav-pills {
+        max-width: 200px;
+    }
+    #vertical .dropme:after{
+        content: "\f107";
+        color:#fff;
+        position: absolute;
+        right: 20px;
+        padding-left: 5px;
+        font-family: 'FontAwesome';
+    }
+    .nav-pills > li > a::after,
+    .dropme-left:after{
+        content: "\f107";
+    }
+    .ttmenu .nav-pills,
+    #vertical .nav-pills {
+        width: 100%;
+        padding:0;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+
+/* SUB MENU STYLE */
+
+.ttmenu .dropdown-submenu {
+    position:relative;
+}
+.ttmenu .dropdown-submenu>.dropdown-menu {
+    top:0;
+    left:100%;
+    margin-top:0;
+    margin-left:0;
+    border-radius:0;
+}
+.ttmenu .dropdown-submenu:hover>.dropdown-menu {
+    display:block;
+}
+.ttmenu .dropdown-submenu.pull-left {
+    float:none;
+}
+.ttmenu .dropdown-submenu.pull-left>.dropdown-menu {
+    left:-100%;
+    margin-left:10px;
+    -webkit-border-radius:6px 0 6px 6px;
+    -moz-border-radius:6px 0 6px 6px;
+    border-radius:6px 0 6px 6px;
+}
+.ttmenu .open > .dropdown-menu {
+  animation-name: slidenavAnimation;
+  animation-duration:.5s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+  -webkit-animation-name: slidenavAnimation;
+  -webkit-animation-duration:.5s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-name: slidenavAnimation;
+  -moz-animation-duration:.5s;
+  -moz-animation-iteration-count: 1;
+  -moz-animation-timing-function: ease;
+  -moz-animation-fill-mode: forwards;
+}
+@keyframes slidenavAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes slidenavAnimation {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

@@ -1,0 +1,52 @@
+﻿@model Abituriyent.Info.Core.Domain.News
+
+@{
+    ViewData["Title"] = "Details of News";
+    Layout = "_AdminLayout";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>News</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd>
+            @Html.Raw(Model.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PublishDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model=>Model.PublishDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ShortContent)
+        </dt>
+        <dd>
+            @Html.Raw(Model.ShortContent)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+        <dd>
+            @Html.Raw(Model.Content)
+        </dd>
+        <dt>
+           Image Header
+        </dt>
+        <dd>
+            @if (Model.ImageUrl != null)
+            {
+                <a href="@Model.ImageUrl" alt="Image">View Image</a>
+            }
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="NewsEdit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="NewsIndex">Back to List</a>
+</div>

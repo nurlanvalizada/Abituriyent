@@ -1,0 +1,81 @@
+﻿@model Abituriyent.Info.Core.Domain.Exam
+
+@{
+    ViewData["Title"] = "Create Exam";
+    Layout = "_AdminLayout";
+}
+
+<h2>Create</h2>
+<div asp-validation-summary="All"></div>
+<form asp-action="ExamCreate" enctype="multipart/form-data">
+    <div class="form-horizontal">
+        <h4>Exam</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Exam Type</label>
+            <div class="col-md-10">
+                <select asp-for="@Model.ExamType" asp-items="@ViewBag.ExamTypes" class="form-control">
+                    <option>Select Type</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Name" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Date" class="col-md-2 control-label"></label>
+            <div class="col-sm-3">
+                <input asp-for="Date" class="form-control datepicker" data-format="mm.dd.yyyy" placeholder="dd.MM.yyyy" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="StartTime" class="col-md-2 control-label"></label>
+            <div class="col-sm-2">
+                <div class="input-group">
+                    <input asp-for="StartTime" class="form-control timepicker" data-template="dropdown" data-show-seconds="true" data-default-time="10:00:00" data-show-meridian="false" data-minute-step="5" data-second-step="5" />
+
+                    <div class="input-group-addon">
+                        <a href="#"><i class="entypo-clock"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="EndTime" class="col-md-2 control-label"></label>
+
+            <div class="col-sm-2">
+                <div class="input-group">
+                    <input asp-for="EndTime" class="form-control timepicker" data-template="dropdown" data-show-seconds="true" data-default-time="13:00:00" data-show-meridian="false" data-minute-step="5" data-second-step="5" />
+
+                    <div class="input-group-addon">
+                        <a href="#"><i class="entypo-clock"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="ExamIndex">Back to List</a>
+</div>
+
+@section Scripts {
+    <script src="~/admin/assets/js/bootstrap-datepicker.js"></script>
+    <script src="~/admin/assets/js/bootstrap-timepicker.min.js"></script>
+    <script src="~/admin/assets/js/bootstrap-colorpicker.min.js"></script>
+    <script src="~/admin/assets/js/daterangepicker/moment.min.js"></script>
+    <script src="~/admin/assets/js/daterangepicker/daterangepicker.js"></script>
+}

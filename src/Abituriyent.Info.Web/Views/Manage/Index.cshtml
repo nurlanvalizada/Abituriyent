@@ -1,0 +1,49 @@
+﻿@model Abituriyent.Info.Web.Models.ManageViewModels.IndexViewModel
+@{
+    ViewData["Title"] = "Hesabı İdarə Et";
+}
+
+<section class="grey page-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-left">
+                <h1>Hesabın İdarə Olunması</h1>
+            </div><!-- end col -->
+            <div class="col-md-6 text-right">
+                <div class="bread">
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="#">Manage</a>
+                        </li>
+                        <li class="active">Index</li>
+                    </ol>
+                </div><!-- end bread -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section><!-- end section -->
+<section class="white section">
+    <div class="container">
+        <div class="row panel-login">
+            <div class="col-lg-12">
+                <div class="col-lg-6 col-lg-offset-3">
+                    <div>
+                        <p class="text-success">@ViewData["StatusMessage"]</p>
+                        <h4>Hesab ayarlarınızı dəyişin</h4>
+                        <hr/>
+                        <dl class="dl-horizontal">
+                            <dt>Şifrə:</dt>
+                            <dd>
+                                <a asp-controller="Manage" asp-action="ChangePassword" class="btn-bracketed">Dəyiş</a>
+                            </dd>
+                            <dt>Digər Giriş Vasitələri:</dt>
+                            <dd>
+                                @Model.Logins.Count <a asp-controller="Manage" asp-action="ManageLogins" class="btn-bracketed">İdarə Et</a>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

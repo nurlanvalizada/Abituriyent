@@ -1,0 +1,65 @@
+@model IEnumerable<Abituriyent.Info.Core.Domain.ExamTest>
+
+@{
+    ViewData["Title"] = "Exam Tests";
+    Layout = "_AdminLayout";
+    var courseId = Context.Request.Query["courseId"].FirstOrDefault();
+    var groupExamId = Context.Request.Query["groupExamId"].FirstOrDefault();
+}
+
+<h2>Exam Tests</h2>
+<br />
+<p>
+    <a asp-action="ExamTestAdd" asp-route-courseId="@courseId" asp-route-examId="@groupExamId">Add Test</a>
+</p>
+@if (Model.Any())
+{
+    <div class="container" id="test">
+        <div class="row">
+            <div id="course-content" class="col-md-8">
+                <div class="course-description">
+                    @foreach (var test in Model)
+                    {
+                        var testId = "optionsRadios" + test.CourseLessonTest.TestId;
+                        <div class="quiz-wrapper">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div id="@testId" class="panel panel-primary">
+                                        <div class="panel-body">
+                                            <div class="col-md-12">
+                                                <p>@Html.Raw(test.CourseLessonTest.Test.Content)</p>
+                                                @foreach (var answer in test.CourseLessonTest.Test.Answers)
+                                                {
+                                                    <div class="radio">
+                                                        <label class="answer">
+                                                            <input style="border: 2px solid black" checked="@(answer.Id.Equals(test.CourseLessonTest.Test.TestAnswer.AnswerId))" name="@testId" value="@answer.Id" type="radio" disabled> @Html.Raw(answer.Text)
+                                                        </label>
+                                                    </div>
+                                                }
+                                            </div>
+                                            <div class="col-md-offset-1">
+                                                <form asp-controller="Admin" asp-action="ExamTestDelete" method="post">
+                                                    <input type="hidden" name="id" value="@test.Id" />
+                                                    <input type="hidden" name="courseId" value="@courseId" />
+                                                    <button onclick="return confirm('Are you sure you want to delete this item ?')" type="submit" class="btn btn-danger btn-sm btn-icon icon-left pull-right">
+                                                        <i class="entypo-cancel"></i>
+                                                        Delete
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div><!-- end body -->
+                                    </div><!-- end panel -->
+                                </div><!-- end col -->
+                            </div><!-- end row -->
+                        </div>
+                        <!-- end quiz wrapper -->
+                    }
+                </div><!-- end desc -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+}
+<br/>
+<p>
+    <a asp-action="ExamCourses" asp-route-groupExamId="@groupExamId">Back to Courses</a>
+</p>

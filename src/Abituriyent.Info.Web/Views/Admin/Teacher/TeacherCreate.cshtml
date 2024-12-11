@@ -1,0 +1,74 @@
+﻿@model Abituriyent.Info.Core.Domain.Teacher
+
+@{
+    ViewData["Title"] = "Create Teacher";
+    Layout = "_AdminLayout";
+}
+
+<h2>Create</h2>
+
+<form asp-action="TeacherCreate" enctype="multipart/form-data">
+    <div class="form-horizontal">
+        <h4>Teacher</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="FullName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Profession" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Profession" class="form-control" />
+                <span asp-validation-for="Profession" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="FacebookProfile" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="FacebookProfile" class="form-control" />
+                <span asp-validation-for="FacebookProfile" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="TwitterProfile" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="TwitterProfile" class="form-control" />
+                <span asp-validation-for="TwitterProfile" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="GooglePlusProfile" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="GooglePlusProfile" class="form-control" />
+                <span asp-validation-for="GooglePlusProfile" class="text-danger" ></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Image</label>
+            <div class="col-md-10">
+                <input id="imageFile" name="imageFile" type="file" class="form-control file2 inline btn btn-primary" data-label="<i class='glyphicon glyphicon-file'></i>Select Image(570x780)" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="About" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <textarea asp-for="About" class="form-control" ></textarea>
+                <span asp-validation-for="About" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="TeacherIndex">Back to List</a>
+</div>

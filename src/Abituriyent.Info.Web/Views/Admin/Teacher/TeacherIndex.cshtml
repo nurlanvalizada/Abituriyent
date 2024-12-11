@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Abituriyent.Info.Core.Domain.Teacher>
+
+@{
+    ViewData["Title"] = "Teachers";
+    Layout = "_AdminLayout";
+}
+
+<h2>Teachers</h2>
+<br />
+<p>
+    <a asp-action="TeacherCreate">New Teacher</a>
+</p>
+<table class="table table-bordered table-striped datatable" id="table-2">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.FullName)</th>
+            <th>@Html.DisplayNameFor(model => model.Profession)</th>
+            <th>@Html.DisplayNameFor(model => model.FacebookProfile)</th>
+            <th>@Html.DisplayNameFor(model => model.TwitterProfile)</th>
+            <th>@Html.DisplayNameFor(model => model.GooglePlusProfile)</th>
+            <th>Image</th>
+            <th colspan="3" class="text-center">Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Profession)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FacebookProfile)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TwitterProfile)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GooglePlusProfile)
+                </td>
+                <td>
+                    @if (item.ImageUrl != null)
+                    {
+                        <a href="@item.ImageUrl" alt="Image">View Image</a>
+                    }
+                </td>
+                <td>
+                    <a asp-action="TeacherEdit" asp-route-id="@item.Id" class="btn btn-default btn-sm btn-icon icon-left">
+                        <i class="entypo-pencil"></i>
+                        Edit
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="TeacherDetails" asp-route-id="@item.Id" class="btn btn-info btn-sm btn-icon icon-left">
+                        <i class="entypo-info"></i>
+                        Details
+                    </a>
+                </td>
+                <td>
+                    <form asp-controller="Admin" asp-action="TeacherDelete" method="post">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <button onclick="return confirm('Are you sure you want to delete this item ?')" type="submit" class="btn btn-danger btn-sm btn-icon icon-left">
+                            <i class="entypo-cancel"></i>
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

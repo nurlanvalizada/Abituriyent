@@ -1,0 +1,80 @@
+﻿@model Abituriyent.Info.Web.Models.ViewModels.RatingViewModel
+@{
+    ViewData["Title"] = "Reytinq";
+}
+
+<section class="grey page-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-left">
+                <h1>Reytinq</h1>
+            </div><!-- end col -->
+            <div class="col-md-6 text-right">
+                <div class="bread">
+                    <ol class="breadcrumb">
+                        <li><a href="#">Account</a></li>
+                        <li class="active"><a href="#">Rating</a></li>
+                    </ol>
+                </div><!-- end bread -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section><!-- end section -->
+
+<section class="white section">
+    <div class="container">
+        <div class="row">
+            <div id="course-left-sidebar" class="col-md-3">
+                <div class="course-image-widget col-sm-12" style="padding: 3%">
+                    <img src="@Url.Action("ViewStudentImage","Account")" alt="" class="img-responsive">
+                </div><!-- end image widget -->
+                <div class="course-meta">
+                    <p class="course-student">Abituriyent : @Model.Student.Person.FirstName @Model.Student.Person.LastName</p>
+                    <hr>
+                    <p class="course-category">Qrup : @Model.Student.Group.Name</p>
+                    <hr>
+                    @if (Model.StudentExams != null)
+                    {
+                        <p class="course-student">
+                            Abituriyent Sayı : @Model.StudentExams.Count
+                        </p>
+                        <hr/>
+
+                        <div class="rating">
+                            <p class="course-student">
+                                Reytinq : @{var rating = Model.StudentExams.IndexOf(Model.StudentExams.Single(st => st.Student.Id == Model.Student.Id)) + 1;}
+                                @rating
+                            </p>
+                        </div><!-- end rating -->
+                        <hr>
+                    }
+                    <p class="course-time">Bitmiş dərslərin sayı : @Model.CompletedLessonCount </p>
+                    <hr>
+                    <p class="course-time">Bitmiş imtahanların sayı : @Model.CompletedExamCount </p>
+                </div><!-- end meta -->
+                @if (Model.StudentExams != null && Model.ExamId!=0)
+                {
+                    <div class="course-button">
+                        <a asp-controller="Exam" asp-action="ViewExam" asp-route-id="@ViewBag.ExamId" class="btn btn-default border-radius"><i class="fa fa-play"></i> View Exam</a>
+                    </div>
+                }
+            </div><!-- end col -->
+            <div id="course-content" class="col-md-8">
+                <div class="form-group">
+                    <select id="ratingDropDown" asp-for="ExamId" asp-items="@Model.Exams" class="form-control">
+                        <option value="0">Ümumi nəticə</option>
+                    </select>
+                </div>
+                @if (Model.StudentExams != null)
+                {
+                    @await Html.PartialAsync("_Rating", Model.StudentExams)
+                }
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section><!-- end section -->
+<script language="JavaScript">
+    $('#ratingDropDown').on('change', function () {
+        window.location = "../Account/Rating?examId=" + $('#ratingDropDown').val();
+    });
+</script>

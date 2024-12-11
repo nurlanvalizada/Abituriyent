@@ -1,0 +1,90 @@
+﻿@using Abituriyent.Info.Core.Domain
+@model Abituriyent.Info.Web.Models.AccountViewModels.LoginViewModel
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    ViewData["Title"] = "Hesaba Giriş";
+}
+<section class="grey page-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-left">
+                <h1>Hesaba Giriş</h1>
+            </div><!-- end col -->
+            <div class="col-md-6 text-right">
+                <div class="bread">
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="#">Account</a>
+                        </li>
+                        <li class="active">Login</li>
+                    </ol>
+                </div><!-- end bread -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section><!-- end section -->
+
+<section class="white section">
+    <div class="container">
+        <div class="row panel-login">
+            <div class="col-lg-12">
+                <div class="col-lg-5 col-lg-offset-3">
+                    <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" id="login-form" method="post" class="form-horizontal">
+                        <div class="form-group">
+                            <input asp-for="Username" class="form-control" placeholder="İstifadəçi Adı" />
+                            <span asp-validation-for="Username" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="Password" class="form-control" placeholder="Şifrə" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group text-center">
+                            <input asp-for="RememberMe" /> Məni Xatırla ?
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <button type="submit" class="form-control btn btn-default">Daxil Ol</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <form asp-controller="Account" asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <button type="submit" id="fbLogin" name="provider" value="Facebook" class="form-control btn btn-default" title="Facebook ilə Daxil Ol"> <i class="fa fa-facebook-square"></i> Facebook ilə Daxil Ol</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="text-center">
+                                    <a asp-controller="Account" asp-action="Register" class="forgot-password">Yeni Hesab Yarat</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="text-center">
+                                    <a asp-controller="Account" asp-action="ForgotPassword" class="forgot-password">Şifrəni Unutmusunuz ?</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <section>
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

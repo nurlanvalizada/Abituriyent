@@ -1,0 +1,76 @@
+﻿@model Abituriyent.Info.Web.Models.ViewModels.ExamViewModel
+@{
+    ViewData["Title"] = Model.Name + " imtahanı";
+}
+
+<section class="grey page-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-left">
+                <h1>@Model.Name</h1>
+            </div><!-- end col -->
+            <div class="col-md-6 text-right">
+                <div class="bread">
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="#">Exam</a>
+                        </li>
+                        <li class="active">TakeExam</li>
+                    </ol>
+                </div><!-- end bread -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+    
+        <!-- Modal Lesson Tests Already Taken-->
+        <div class="modal fade" id="modal-lessonTaken" style="z-index: 10000;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Diqqet!</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        Siz bu imtahanin testlerini artiq cavablandirmisiniz..
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- end container -->
+</section><!-- end section -->
+
+<section class="white section">
+    <div class="timerCountDown" style="position: fixed; right: -60px; z-index: 100; width: 400px;"></div>
+    <input type="hidden" name="type" value="exam"/>
+    <input type="hidden" name="examId" value="@ViewBag.ExamId"/>
+    @await Html.PartialAsync("_Tests", Model.Tests)
+</section><!-- end section -->
+
+@section Scripts{
+    @if (ViewBag.ExamStatus == "available")
+    {
+        <script src="~/js/syotimer/jquery.syotimer.js"></script>
+    }
+<script>
+    $(document).ready(function () {
+        var examStatus = "@ViewBag.ExamStatus";
+        if (examStatus === "available") {
+            var dt = new Date();
+            var month = dt.getMonth() + 1;
+            $('.timerCountDown').syotimer({
+                year: dt.getFullYear(),
+                month: month,
+                day: dt.getDate(),
+                hour: dt.getHours() + 3,
+                minute: dt.getMinutes()
+            });
+        }
+        $('#test').css('display', 'block');
+    });
+</script>
+}

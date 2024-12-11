@@ -1,0 +1,33 @@
+@model IEnumerable<Abituriyent.Info.Core.Domain.GroupExam>
+
+@{
+    ViewData["Title"] = "Exam Groups";
+    Layout = "_AdminLayout";
+}
+
+<h2>Exam Groups</h2>
+<br />
+<table class="table table-bordered table-striped datatable" id="table-2">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Group.Name)</th>
+            <th>Courses</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Group.Name)
+                </td>
+                <td>
+                    <a asp-action="ExamCourses" asp-route-groupExamId="@item.Id" class="btn btn-green btn-sm btn-icon icon-left">
+                        <i class="entypo-bag"></i>
+                        View Courses
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

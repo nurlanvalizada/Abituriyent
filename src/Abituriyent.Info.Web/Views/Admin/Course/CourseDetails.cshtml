@@ -1,0 +1,60 @@
+@model Abituriyent.Info.Core.Domain.Course
+
+@{
+    ViewData["Title"] = "Course Details";
+    Layout = "_AdminLayout";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Course</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Subject.Name)
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ScoreRate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ScoreRate)
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            ImageUrl
+        </dt>
+        <dd>
+            @if (Model.ImageUrl != null)
+            {
+                <a href="@Model.ImageUrl" alt="Image">View Image</a>
+            }
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+           Teacher Name
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Teacher.FullName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="CourseEdit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="CourseIndex" asp-route-groupId="@Model.GroupId">Back to List</a>
+</div>

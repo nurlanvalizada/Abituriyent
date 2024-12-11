@@ -1,0 +1,22 @@
+# IDEs and editors
+.vs/
+
+# bin and obj folders
+/src/Abituriyent.Info.Core/bin
+/src/Abituriyent.Info.Core/obj
+
+/src/Abituriyent.Info.DataAccess/bin
+/src/Abituriyent.Info.DataAccess/obj
+
+/src/Abituriyent.Info.Repository/bin
+/src/Abituriyent.Info.Repository/obj
+
+/src/Abituriyent.Info.Web/bin
+/src/Abituriyent.Info.Web/obj
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+.idea
+.DS_Store

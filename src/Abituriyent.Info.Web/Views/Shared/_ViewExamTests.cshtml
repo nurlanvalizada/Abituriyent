@@ -1,0 +1,125 @@
+﻿@model IEnumerable<Abituriyent.Info.Web.Models.ViewModels.ExamTestViewModel>
+@{
+    var testNumber = 0;
+}
+
+@if (Model.Any())
+{
+    <div class="container" id="test">
+        <div class="row">
+            <div id="course-content" class="col-md-8">
+                <div class="course-description">
+                    @foreach (var examTest in Model)
+                    {
+                        testNumber++;
+                        var testId = "optionsRadios" + examTest.Id;
+                        <h3>Sual @testNumber</h3>
+                        <div class="quiz-wrapper">
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <div id="@testId" class="panel panel-primary">
+                                        <div class="panel-body">
+                                            <p>@examTest.Content</p>
+                                            @if (examTest.isCorrect)
+                                            {
+                                                @if ((int)examTest.TestType == 0)
+                                                {
+                                                    @foreach (var answer in examTest.Answers)
+                                                    {
+                                                        <div class="radio">
+                                                            @if (examTest.studentAnswer != null && answer.Id.Equals(examTest.studentAnswer.Id))
+                                                            {
+                                                                <label style="color:#07610C;font-weight:bold">
+                                                                    <input style="border: 2px solid black" checked name="@testId" value="@answer.Id" type="radio"> @answer.Text
+                                                                </label>
+                                                            }
+                                                            else
+                                                            {
+                                                                <label>
+                                                                    <input style="border: 2px solid black" name="@testId" value="@answer.Id" type="radio"> @answer.Text
+                                                                </label>
+                                                            }
+
+                                                        </div>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <span>
+                                                        Sizin cavabınız: <b style=color:#07610C;>
+                                                            @examTest.studentAnswer.Text
+                                                        </b>
+                                                    </span>
+
+                                                }
+                                            }
+                                            else
+                                            {
+                                                @if ((int)examTest.TestType == 0)
+                                                {
+                                                    @foreach (var answer in examTest.Answers)
+                                                    {
+                                                        <div class="radio">
+                                                            @if (examTest.studentAnswer != null && answer.Id.Equals(examTest.studentAnswer.Id))
+                                                            {
+                                                                <label style="color:#ac1818;font-weight:bold">
+                                                                    <input style="border: 2px solid black" checked name="@testId" value="@answer.Id" type="radio" disabled> @answer.Text
+                                                                </label>
+                                                            }
+                                                            else if (answer.Id.Equals(examTest.correctAnswer.Id))
+                                                            {
+                                                                <label style="color:#07610C;font-weight:bold">
+                                                                    <input style="border: 2px solid black" name="@testId" value="@answer.Id" type="radio" disabled> @answer.Text
+                                                                </label>
+                                                            }
+                                                            else
+                                                            {
+                                                                <label>
+                                                                    <input style="border: 2px solid black" name="@testId" value="@answer.Id" type="radio" disabled> @answer.Text
+                                                                </label>
+                                                            }
+
+
+                                                        </div>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    @if (examTest.studentAnswer != null) { 
+                                                    <span>
+                                                        Sizin cavabınız: <b style=color:#ac1818;>
+                                                            @examTest.studentAnswer.Text
+                                                        </b>
+                                                    </span><br />}
+                                                    else
+                                                    {
+                                                        <span>
+                                                            <b style=color:#ac1818;>
+                                                               Testi cavablandırmayıbsız!
+                                                            </b>
+                                                        </span><br />
+
+                                                    }
+                                                    <span>
+                                                        Doğru cavab: <b style=color:#07610C;>
+                                                            @examTest.correctAnswer.Text
+                                                        </b>
+                                                    </span>
+
+                                                }
+
+                                            }
+                                        </div><!-- end body -->
+                                    </div><!-- end panel -->
+                                </div><!-- end col -->
+                            </div><!-- end row -->
+                        </div>
+                        <!-- end quiz wrapper -->
+                    }
+                </div><!-- end desc -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+}

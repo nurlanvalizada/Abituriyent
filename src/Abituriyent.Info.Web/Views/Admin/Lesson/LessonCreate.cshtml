@@ -1,0 +1,63 @@
+@model Abituriyent.Info.Web.Models.AdminViewModels.LessonViewModel
+
+@{
+    ViewData["Title"] = "Create Lesson";
+    Layout = "_AdminLayout";
+}
+
+<h2>Create</h2>
+
+<form asp-action="LessonCreate" enctype="multipart/form-data">
+    <div class="form-horizontal">
+        <h4>Lesson</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" name="Lesson.SubjectId" value="@ViewBag.SubjectId" />
+        <div class="form-group">
+            <label asp-for="Lesson.Name" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Lesson.Name" class="form-control" />
+                <span asp-validation-for="Lesson.Name" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Lesson.VideoUrl" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Lesson.VideoUrl" class="form-control" />
+                <span asp-validation-for="Lesson.VideoUrl" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Lesson.PdfFile" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input id="pdfFile" name="pdfFile" type="file" class="form-control file2 inline btn btn-primary" data-label="<i class='glyphicon glyphicon-file'></i>Select PDF file" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">Qruplar</label>
+            <div class="panel panel-gradient col-md-offset-2 col-md-10">
+                @foreach (var group in Model.Groups)
+                {
+                    <p>
+                        <input id="group@(group.Id)" type="checkbox"
+                               name="GroupIds"
+                               value="@group.Id" />
+                        <label>@group.Name</label>
+                    </p>
+                }
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-11">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="LessonIndex" asp-route-subjectId="@ViewBag.SubjectId">Back to List</a>
+</div>

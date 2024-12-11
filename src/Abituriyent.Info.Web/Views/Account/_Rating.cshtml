@@ -1,0 +1,28 @@
+﻿@model IList<Abituriyent.Info.Core.Domain.StudentExam>
+
+<div class="course-table">
+    <h4>Reytinq Sıralaması</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="width:20%">Şəkil</th>
+                <th style="width:20%">Ad</th>
+                <th style="width:20%">Soyad</th>
+                <th style="width:20%">Ata Adı</th>
+                <th style="width:20%">Nəticə</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var studentExam in Model)
+            {
+                <tr>
+                    <td><img src="@Url.Action("ViewStudentImage",new {id=studentExam.Student.Id})" style="width: 20%; height: auto;" alt=""></td>
+                    <td>@studentExam.Student.Person.FirstName</td>
+                    <td>@studentExam.Student.Person.LastName</td>
+                    <td>@studentExam.Student.FatherName</td>
+                    <td>@studentExam.ExamResult</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div><!-- end course-table -->

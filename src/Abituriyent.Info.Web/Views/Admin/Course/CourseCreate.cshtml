@@ -1,0 +1,64 @@
+﻿@model Abituriyent.Info.Web.Models.ViewModels.CourseViewModel
+
+@{
+    ViewData["Title"] = "Create Course";
+    Layout = "_AdminLayout";
+}
+
+<h2>Create</h2>
+
+<form asp-action="CourseCreate" enctype="multipart/form-data">
+    <div class="form-horizontal">
+        <h4>Course</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" name="Course.GroupId" value="@Model.Course.GroupId" />
+        <div class="form-group">
+            <label asp-for="Course.Subject" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="Course.SubjectId" asp-items="@Model.Subjects" class="form-control">
+                    <option>Select Subject</option>
+                </select>
+                <span asp-validation-for="Subjects" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Course.Teacher" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="Course.TeacherId" asp-items="@Model.Teachers" class="form-control">
+                    <option>Select Teacher</option>
+                </select>
+                <span asp-validation-for="Course.TeacherId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Course.Description" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <textarea asp-for="Course.Description" class="form-control"></textarea>
+                <span asp-validation-for="Course.Description" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Course.ScoreRate" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Course.ScoreRate" class="form-control" />
+                <span asp-validation-for="Course.ScoreRate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Image</label>
+            <div class="col-md-10">
+                <input id="imageFile" name="imageFile" type="file" class="form-control file2 inline btn btn-primary" data-label="<i class='glyphicon glyphicon-file'></i>Select Image(400x280)" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-11">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="CourseIndex" asp-route-groupId="@Model.Course.GroupId">Back to List</a>
+</div>

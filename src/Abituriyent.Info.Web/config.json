@@ -1,0 +1,8 @@
+﻿{
+  "userSecrets": {
+    "facebook": {
+      "appId": "app_id",
+      "secret": "app_secret"
+    }
+  }
+}

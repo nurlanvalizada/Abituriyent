@@ -1,0 +1,73 @@
+﻿@model Abituriyent.Info.Web.Models.ViewModels.ContactMessageViewModel
+@{
+    ViewData["Title"] = "Bizimlə Əlaqə";
+}
+<article id="contact" class="map-section">
+    <div id="map" class="wow slideInUp"></div>
+</article><!-- end section -->
+<section class="white section">
+    <div class="container">
+        <div class="row contact-wrapper">
+            <div id="contactFormWrapper" class="col-md-9 col-sm-9 col-xs-12 content-widget">
+                <div class="widget-title">
+                    <h4>Əlaqə Formu</h4>
+                    <hr>
+                </div>
+                <div id="contact_form" class="contact_form row">
+                    <form id="contactForm" method="post">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <input asp-for="FullName" class="form-control" placeholder="Ad və Soyad *">
+                            <span asp-validation-for="FullName" class="text-danger"></span>
+                            <input asp-for="Email" class="form-control" placeholder="Email *">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                            <input asp-for="Topic" class="form-control" placeholder="Mövzu *">
+                            <span asp-validation-for="Topic" class="text-danger"></span>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                            <textarea class="form-control" asp-for="Message" rows="6" placeholder="Sizin Mesajınız *"></textarea>
+                            <span asp-validation-for="Message" class="text-danger"></span>
+                            <button type="button" id="sendMessage" class="btn btn-primary btn-block">Send Message</button>
+                        </div>
+                    </form>
+                </div><!-- end contact-form -->
+            </div><!-- end col -->
+
+            <div class="col-md-3 col-sm-3 col-xs-12 content-widget">
+                <div class="widget-title">
+                    <h4>Əlaqə Məlumatları</h4>
+                    <hr>
+                </div>
+                @await Component.InvokeAsync("ContactDetails")
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section><!-- end section -->
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=your_api_key"></script>
+    <script src="~/js/map.js"></script>
+    <script src="~/js/contact.js"></script>
+    <script>
+        $("#sendMessage")
+            .click(function () {
+                if ($("#contactForm").valid()) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/Home/Contact",
+                        data: $("#contactForm").serialize(),
+                        success: function (response) {
+                            if (response == true) {
+                                $("#contactFormWrapper").empty();
+                                $("#contactFormWrapper")
+                                    .append("<div><h1>Sizin mesajınız müvəffəqiyyətlə göndərildi.\
+                        Sizin fikirləriniz bizim çox önəmlidir.\
+                        Təşəkkür edirik...</h1></div>");
+                            }
+                        }
+                    });
+                }
+            });
+    </script>
+}

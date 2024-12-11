@@ -1,0 +1,95 @@
+﻿@model Abituriyent.Info.Web.Models.AdminViewModels.TestViewModel
+
+@{
+    ViewData["Title"] = "Create Test";
+    Layout = "_AdminLayout";
+}
+
+<h2>Create</h2>
+<h4>Test</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-12" id="@Model.Test.Id">
+        <form id="form" asp-action="TestSave">
+            <input type="hidden" name="Test.CourseLesson.LessonId" value="@ViewBag.LessonId" />
+            <div class="form-group">
+                <label>Test Type</label>
+                <select id="typeDropDown" asp-for="@Model.Test.Test.TestType" class="form-control">
+                    <option value="0" selected="selected">Closed</option>
+                    <option value="1">Open</option>
+                </select>
+            </div>
+            @*<div class="form-group">
+                <label>Test Use Case</label>
+                <select asp-for="@Model.Test.Test.TestOrigin" class="form-control">
+                    <option value="1" selected="selected">For Lesson</option>
+                    <option value="2">For Exam</option>
+                </select>
+            </div>*@
+            <div class="form-group">
+                <label>Groups</label>
+                <div class="panel panel-gradient">
+                    @foreach (var group in Model.Groups)
+                    {
+                        <p style="padding-left:1%">
+                            <input id="group@(group.Id)" type="checkbox"
+                                   name="GroupIds"
+                                   value="@group.Id" />
+                            <label>@group.Name</label>
+                        </p>
+                    }
+                </div>
+            </div>
+            <div id="editcontent">
+                @await Html.PartialAsync("Test/_Edit", Model)
+            </div>
+        </form>
+    </div>
+</div>
+<br/>
+<div>
+    <a asp-action="TestIndex" asp-route-lessonId="@ViewBag.LessonId">Back to List</a>
+</div>
+
+@section TestScripts {
+    <script src="~/admin/assets/js/ckeditor/ckeditor.js"></script>
+    <script src="~/js/test.js"></script>
+    <script>
+        $('#typeDropDown').on('change', function () {
+            $.post("../Admin/TestTypeChange", $("form").serialize(), function (data, status) {
+                $("#editcontent").html(data.replace(/&lt;/g, '<').replace(/&gt;/g, '>'));
+                $("#content").html('<div  id="editor">' + $("#content").html() + '</div>');
+                CKEDITOR.replace('editor', {
+                    filebrowserUploadUrl: '/Admin/UploadTestImage',
+                    filebrowserWindowWidth: '640',
+                    filebrowserWindowHeight: '480'
+                });
+                $("#edit").css("display", "none");
+                $("#save").css("display", "block");
+
+            });
+        });
+        $(function () {
+            $("#content").html('<div  id="editor">' + $("#content").html() + '</div>');
+            CKEDITOR.replace('editor', {
+                filebrowserUploadUrl: '/Admin/UploadTestImage',
+                filebrowserWindowWidth: '640',
+                filebrowserWindowHeight: '480'
+            });
+            $("#edit").css("display", "none");
+            $("#save").css("display", "block");
+
+        });
+        function saveTest() {
+            $.ajax({
+                type: "POST",
+                url: "/Admin/TestSave",
+                data: $("form").serialize(),
+                success: function (response) {
+                    window.location = "Test/TestIndex";
+                }
+            });
+        }
+    </script>
+}

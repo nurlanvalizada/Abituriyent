@@ -1,0 +1,64 @@
+@model Abituriyent.Info.Web.Models.AdminViewModels.TestViewModel
+
+@{
+    ViewData["Title"] = "Edit Test";
+    Layout = "_AdminLayout";
+
+}
+<h2>Edit</h2>
+<h4>Test</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-12" id="@Model.Test.Test.Id">
+        <form id="form" asp-action="TestSave">
+            <input type="hidden" name="Test.CourseLesson.LessonId" value="@ViewBag.LessonId" />
+            <div class="form-group">
+                <label>Qruplar</label>
+                <div class="panel panel-gradient">
+                    @foreach (var group in Model.Groups)
+                    {
+                        <p style="padding-left:1%">
+                            <input id="group@(group.Id)" type="checkbox"
+                                   name="GroupIds"
+                                   value="@group.Id" @(Model.GroupIds.Contains(group.Id) ? "checked" : "") />
+                            <label>@group.Name</label>
+                        </p>
+                    }
+                </div>
+            </div>
+            <div id="editcontent">
+                @if (Model.Test.Test.TestType == 0)
+                {
+                    @await Html.PartialAsync("Test/_Edit", Model)
+                }
+                else
+                {
+                    @await Html.PartialAsync("Test/_Edit1", Model)
+
+                }
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+<div>
+    <a asp-action="TestIndex" asp-route-lessonId="@ViewBag.LessonId">Back to List</a>
+</div>
+
+@section TestScripts {
+    <script src="~/admin/assets/js/ckeditor/ckeditor.js"></script>
+    <script src="~/js/test.js"></script>
+    <script>
+        function saveTest() {
+            $.ajax({
+                type: "POST",
+                url: "/Admin/TestSave",
+                data: $("form").serialize(),
+                success: function (response) {
+                    window.location = "Test/TestIndex";
+                }
+            });
+        }
+    </script>
+}

@@ -1,0 +1,69 @@
+@model IEnumerable<Abituriyent.Info.Core.Domain.Test>
+
+@{
+    ViewData["Title"] = "Tests";
+    Layout = "_AdminLayout";
+    var lessonId = Context.Request.Query["lessonId"].FirstOrDefault();
+}
+
+<h2>Tests</h2>
+<br/>
+<p>
+    <a asp-action="TestCreate" asp-route-lessonId="@lessonId">Add Test</a>
+</p>
+@if (Model.Any())
+{
+    <div class="container" id="test">
+        <div class="row">
+            <div id="course-content" class="col-md-8">
+                <div class="course-description">
+                    @foreach (var test in Model)
+                    {
+                        var testId = "optionsRadios" + test.Id;
+                        <div class="quiz-wrapper">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div id="@testId" class="panel panel-primary">
+                                        <div class="panel-body">
+                                            <div class="col-md-12">
+                                                <p>@Html.Raw(test.Content)</p>
+                                                @foreach (var answer in test.Answers)
+                                                {
+                                                    <div class="radio">
+                                                        <label class="answer">
+                                                            <input style="border: 2px solid black" checked="@(answer.Id.Equals(test.TestAnswer.AnswerId))" name="@testId" value="@answer.Id" type="radio" disabled> @Html.Raw(answer.Text)
+                                                        </label>
+                                                    </div>
+                                                }
+                                            </div>
+                                            <div class="col-md-offset-1">
+                                                <form asp-controller="Admin" asp-action="TestDelete" method="post">
+                                                    <input type="hidden" name="id" value="@test.Id" />
+                                                    <input type="hidden" name="lessonId" value="@lessonId" />
+                                                    <button onclick="return confirm('Are you sure you want to delete this item ?')" type="submit" class="btn btn-danger btn-sm btn-icon icon-left pull-right">
+                                                        <i class="entypo-cancel"></i>
+                                                        Delete
+                                                    </button>
+                                                </form>
+                                                <a asp-action="TestEdit" asp-route-id="@test.Id" asp-route-lessonId="@lessonId" class="btn btn-default btn-sm btn-icon icon-left pull-right">
+                                                    <i class="entypo-pencil"></i>
+                                                    Edit
+                                                </a>
+                                            </div>
+                                        </div><!-- end body -->
+                                    </div><!-- end panel -->
+                                </div><!-- end col -->
+                            </div><!-- end row -->
+                        </div>
+                        <!-- end quiz wrapper -->
+                    }
+                </div><!-- end desc -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+}
+else
+{
+    <br/>
+    <h4>No tests here</h4>
+}

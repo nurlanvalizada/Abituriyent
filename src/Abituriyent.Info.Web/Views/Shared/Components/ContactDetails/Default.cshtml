@@ -1,0 +1,9 @@
+﻿@model  Abituriyent.Info.Web.Models.ViewModels.ContactDetailsViewModel
+<div class="contact-list">
+    <ul class="contact-details">
+        <li><i class="fa fa-link"></i> <a href="@Model.OurWebSite">@Model.OurWebSite.Replace("http://","")</a></li>
+        <li><i class="fa fa-envelope"></i> <a href="mailto:@Model.OurEmail">@Model.OurEmail</a></li>
+        <li><i class="fa fa-phone"></i>@Model.OurPhone</li>
+        <li><i class="fa fa-home"></i>@Model.OurLocation</li>
+    </ul>
+</div><!-- end contact-list -->

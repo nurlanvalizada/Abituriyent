@@ -1,0 +1,193 @@
+﻿@model Abituriyent.Info.Web.Models.AccountViewModels.AccountEditViewModel
+@{
+    ViewData["Title"] = "Profilin Redaktəsi";
+}
+<section class="grey page-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-left">
+                <h1>Hesabın Redaktəsi</h1>
+            </div><!-- end col -->
+            <div class="col-md-6 text-right">
+                <div class="bread">
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="#">Account</a>
+                        </li>
+                        <li class="active">Edit</li>
+                    </ol>
+                </div><!-- end bread -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section><!-- end section -->
+
+<form asp-controller="Account" asp-action="Edit" method="post" class="form-horizontal" enctype="multipart/form-data">
+    <section class="white section">
+        <div class="container">
+            <div class="row">
+                <div id="course-left-sidebar" class="col-md-3">
+                    <div class="col-sm-12">
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail" style="width: 100%; height: 100%;" data-trigger="fileinput">
+                               <img id="image" src="@Url.Action("ViewStudentImage", "Account")" class="img-responsive" alt="student image">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px"></div>
+                            <div>
+                                <span class="btn btn-white btn-file">
+                                    <span class="fileinput-new">Şəkil Seç</span>
+                                    <span class="fileinput-exists">Dəyiş</span>
+                                    <input type="file" name="studentImage" accept="image/*">
+                                </span>
+                                <a href="#" class="btn btn-orange fileinput-exists" data-dismiss="fileinput">Sil</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-meta">
+                        <p>@Model.FirstName @Model.LastName</p>
+                        <hr>
+                        <p>
+                            <a asp-controller="Account" asp-action="Rating">Reytinq</a>
+                        </p>
+                    </div><!-- end meta -->
+                </div><!-- end col -->
+
+                <div id="course-content" class="col-md-9">
+                    <div class="course-description">
+                        <h3 class="course-title">Hesabı Redaktə Et</h3>
+                        <p>
+                            Hesabınızı redaktə etmək üçün müvafiq xanaları doldurub "Yadda Saxla" düyməsini basmaq lazımdır ...
+                        </p>
+                        <span class="text-danger field-validation-error">@ViewBag.FileSizeInvalid</span>
+                        <div class="edit-profile">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <input asp-for="Username" name="username"  class="form-control" placeholder="İstifaçi Adı *" />
+                                </div>
+                                <div class="form-group">
+                                    <input asp-for="Email" class="form-control"  placeholder="Email Ünvanı *" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input asp-for="Password" tabindex="2" class="form-control" placeholder="Şifrə *" />
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input asp-for="FirstName" class="form-control"  placeholder="Ad *" />
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input asp-for="LastName" class="form-control"  placeholder="Soyad *" />
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input asp-for="FatherName" class="form-control"  placeholder="Ata Adı *" />
+                                    <span asp-validation-for="FatherName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input asp-for="Address" class="form-control"  placeholder="Ünvan *" />
+                                    <span asp-validation-for="Address" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                @*Register a free account. We all are trying to do the best for you.*@
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <input asp-for="HomePhone" class="form-control"  placeholder="Ev Telefonu" />
+                                    <span asp-validation-for="HomePhone" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input asp-for="MobilePhone" class="form-control"  placeholder="Mobil Telefon" />
+                                    <span asp-validation-for="MobilePhone" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <div style="width: 25%; float: left;">
+                                        <span style="line-height: 3">@Html.DisplayNameFor(m => m.Gender):</span>
+                                    </div>
+                                    <div style="width: 75%; float: left;">
+                                        <div style="width: 25%; float: left; padding-top: 3%"><input asp-for="Gender" type="radio" value="1" /> Kişi</div>
+                                        <div style="width: 25%; float: left; padding-top: 3%"><input asp-for="Gender" type="radio" value="2" /> Qadın</div>
+                                        <div style="clear: both;"></div>
+                                        <span asp-validation-for="Gender" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div style="width: 30%; float: left;">
+                                        <select asp-for="Day" asp-items="@ViewBag.Days" class="form-control" style="width: 80%;">
+                                            <option>Gün</option>
+                                        </select>
+                                        <span asp-validation-for="Day" class="text-danger"></span>
+                                    </div>
+                                    <div style="width: 40%; float: left;">
+                                        <select asp-for="Month" asp-items="@ViewBag.Months" class="form-control" style="width: 86%;">
+                                            <option>Ay</option>
+                                        </select>
+                                        <span asp-validation-for="Month" class="text-danger"></span>
+                                    </div>
+                                    <div style="width: 30%; float: left;">
+                                        <select asp-for="Year" asp-items="@ViewBag.Years" class="form-control">
+                                            <option>İl</option>
+                                        </select>
+                                        <span asp-validation-for="Year" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <select asp-for="CityId" asp-items="@Model.Cities" class="form-control">
+                                        <option>Şəhəri Seç</option>
+                                    </select>
+                                    <span asp-validation-for="Schools" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <select asp-for="SchoolId" asp-items="@Model.Schools" class="form-control">
+                                        <option>Mektebi Seç</option>
+                                    </select>
+                                    <span asp-validation-for="SchoolId" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <select asp-for="GroupId" asp-items="@Model.Groups" class="form-control">
+                                        <option>Qrup Seç</option>
+                                    </select>
+                                    <span asp-validation-for="GroupId" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <button type="submit" class="form-control btn btn-default btn-block">Yadda Saxla</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div><!-- end edit profile -->
+                    </div><!-- end desc -->
+                </div><!-- end col -->
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </section><!-- end section -->
+</form>
+
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <script>
+        $("#CityId")
+           .change(function () {
+               var url = '/api/MyApi/GetSchools/?cityId=' + this.value;
+               var options = $("#SchoolId");
+               options.empty();
+               options.append($("<option />").text("Məktəbi Seç"));
+               $.ajax({
+                   url: url,
+                   type: 'GET',
+                   success: function (data) {
+                       $.each(data,
+                           function () {
+                               options.append($("<option />").val(this.value).text(this.text));
+                           });
+                   }
+               });
+           });
+    </script>
+}

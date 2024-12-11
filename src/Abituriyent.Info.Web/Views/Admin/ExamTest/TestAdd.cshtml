@@ -1,0 +1,69 @@
+@model Abituriyent.Info.Web.Models.AdminViewModels.ExamTestViewModel
+
+@{
+    ViewData["Title"] = "Add Test";
+    Layout = "_AdminLayout";
+}
+
+<h2>Select Exam Tests from All Tests List</h2>
+<form asp-action="ExamTestAdd" enctype="multipart/form-data">
+    @if (Model.CourseLessonTests.Any())
+    {
+        <div class="container" id="test">
+            <div class="row">
+                <div id="course-content" class="col-md-8">
+                    <div class="course-description">
+                        <input type="hidden" asp-for="ExamTest.GroupExamId" />
+                        <input type="hidden" asp-for="CourseLesson.CourseId" />
+                        @foreach (var test in Model.CourseLessonTests)
+                        {
+                            var testId = "optionsRadios" + test.Id;
+                            <div class="quiz-wrapper">
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input id="address@(test.Id)" type="checkbox"
+                                               name="TestIds"
+                                               value="@test.Id"
+                                               @(Model.TestIds.Contains(test.Id) ? "checked" : "") />
+                                        <div id="@testId" class="panel panel-primary">
+                                            <div class="panel-body">
+                                                <div class="col-md-12">
+                                                    <p>@Html.Raw(test.Test.Content)</p>
+                                                    @foreach (var answer in test.Test.Answers)
+                                                    {
+                                                        <div class="radio">
+                                                            <label class="answer">
+                                                                <input style="border: 2px solid black" checked="@(answer.Id.Equals(test.Test.TestAnswer.AnswerId))" name="@testId" value="@answer.Id" type="radio" disabled> @Html.Raw(answer.Text)
+                                                            </label>
+                                                        </div>
+                                                    }
+                                                </div>
+
+                                            </div><!-- end body -->
+                                        </div><!-- end panel -->
+                                    </div><!-- end col -->
+                                </div><!-- end row -->
+                            </div>
+                            <!-- end quiz wrapper -->
+                        }
+                    </div><!-- end desc -->
+                    <div class="form-group">
+                        <div>
+                            <input type="submit" value="Add" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div><!-- end col -->
+            </div><!-- end row -->
+        </div><!-- end container -->
+    }
+    else
+    {
+        <br/>
+        <h4>No Test to Add</h4>
+    }
+</form>
+<br />
+<p>
+    <a asp-action="ExamTestIndex" asp-route-groupExamId="@Model.ExamTest.GroupExamId" asp-route-courseId="@Model.CourseLesson.CourseId">Back to Exam Tests</a>
+</p>

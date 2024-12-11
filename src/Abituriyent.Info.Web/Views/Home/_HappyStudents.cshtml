@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Abituriyent.Info.Core.Domain.HappyStudent>
+<div class="row">
+    @foreach (var student in Model)
+    {
+        <div class="col-lg-4 col-md-4 col-sm-12">
+            <div class="testimonial">
+                @if (student.ImageUrl != null)
+                {
+                    <img class="alignleft img-circle" src="@student.ImageUrl" alt="">
+                }
+                else
+                {
+                    <img class="alignleft img-circle" src="~/upload/student_01.png" alt="">
+                }
+                <p>@student.Review </p>
+                <div class="testimonial-meta">
+                    <h4>@student.FullName<small><a href="#">abituriyent.info</a></small></h4>
+                </div>
+            </div><!-- end dmbox -->
+        </div>
+    }
+</div><!-- end row -->

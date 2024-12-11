@@ -1,0 +1,84 @@
+﻿@using Abituriyent.Info.Core.Models
+@model IEnumerable<Abituriyent.Info.Web.Models.ViewModels.TestViewModel>
+@{
+    var testNumber = 0;
+}
+
+@if (Model.Any())
+{
+    <div class="container" id="test" style="display: none;">
+        <form id="testForm">
+            <div class="row">
+                <div id="course-content" class="col-md-8">
+                    <div class="course-description">
+                        @foreach (var test in Model)
+                        {
+                            var testId = string.Empty;
+                            switch (test.TestType)
+                            {
+                                case TestType.Closed:
+                                    testId = "optionsRadios" + test.Id;
+                                    break;
+                                case TestType.OpenValue:
+                                    testId = "openValue" + test.Id;
+                                    break;
+                                case TestType.OpenSelection:
+                                    break;
+                                case TestType.OpenMatching:
+                                    break;
+                            }
+                            testNumber++;
+                            <h3>Sual @testNumber</h3>
+                            <div class="quiz-wrapper">
+                                <div>@Html.Raw(test.Content)</div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="@testId" class="panel panel-primary">
+                                            <div class="panel-body">
+                                                @switch (test.TestType)
+                                                {
+                                                    case TestType.Closed:
+                                                        foreach (var answer in test.Answers)
+                                                        {
+                                                            <div class="radio">
+                                                                <label class="answer">
+                                                                    <input style="border: 2px solid black" name="@testId" value="@answer.Id" type="radio"> @Html.Raw(answer.Text)
+                                                                </label>
+                                                            </div>
+                                                        }
+                                                        break;
+                                                    case TestType.OpenValue:
+                                                        <div class="answer">
+                                                            <input type="text" class="form-control" style="width: 60%" name="@testId" />
+                                                        </div>
+                                                        break;
+                                                    case TestType.OpenSelection:
+                                                        break;
+                                                    case TestType.OpenMatching:
+                                                        break;
+                                                }
+
+                                            </div><!-- end body -->
+                                        </div><!-- end panel -->
+                                    </div><!-- end col -->
+                                </div><!-- end row -->
+                            </div>
+                        <!-- end quiz wrapper -->
+                        }
+                        <hr class="invis">
+                        <p id="currentResult" class="lead"></p>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar">
+                                <span class="sr-only"></span>
+                            </div>
+                        </div><!-- end progress -->
+                        <div class="panel-footer" id="testScore">
+                            <input type="button" id="checkResult" class="btn btn-primary " role="button" value="Təsdiqlə" />
+                        </div>
+                        <div id="result"></div>
+                    </div><!-- end desc -->
+                </div><!-- end col -->
+            </div><!-- end row -->
+        </form>
+    </div><!-- end container -->
+}

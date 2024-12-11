@@ -1,0 +1,304 @@
+﻿@model IEnumerable<Abituriyent.Info.Core.Domain.GroupExam>
+@{
+    ViewData["Title"] = "İmtahanlar";
+}
+<section class="grey page-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-left">
+                <h1>İmtahanlar</h1>
+            </div><!-- end col -->
+            <div class="col-md-6 text-right">
+                <div class="bread">
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="#">Exam</a>
+                        </li>
+                        <li class="active">Index</li>
+                    </ol>
+                </div><!-- end bread -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section><!-- end section -->
+
+<section class="white section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title text-center">
+                    <h4>Mövcud İmtahanlar</h4>
+                </div>
+            </div><!-- end col -->
+        </div><!-- end row -->
+        @{ var currentExams = Model.Where(ge => ge.Exam.Date.Add(ge.Exam.StartTime) <= DateTime.Now && ge.Exam.Date.Add(ge.Exam.EndTime) >= DateTime.Now).ToList();}
+        @if (currentExams.Any())
+        {
+            foreach (var ge in currentExams)
+            {
+                <div class="row" style="border: 1px solid gray; border-radius: 5px;">
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div>
+                            <div>
+                                <b>Qrup: </b>@ge.Group?.Name
+                            </div>
+                            <div>
+                                <b>İmtahanın Adı:</b> @ge.Exam.Name
+                            </div>
+                            <div>
+                            </div>
+                        </div><!-- end dmbox -->
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div>
+                            <div>
+                                <b>Tarix:</b> @ge.Exam.Date.ToString("dd.MM.yyyy")
+                            </div>
+                            <div>
+                                <b>Başlama Vaxtı:</b> @ge.Exam.StartTime
+                            </div>
+                            <div>
+                                <b>Bitmə Vaxtı:</b> @ge.Exam.EndTime
+                            </div>
+                        </div><!-- end dmbox -->
+                    </div>
+
+                    <!-- Modal Exam (Confirm)-->
+                    <div class="modal fade" id="modal-exam-@ge.Id" data-backdrop="static" style="z-index: 10000;">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Diqqət!</h4>
+                                </div>
+                                <div class="modal-body">
+                                    Sizin imtahanda @((ge.Exam.EndTime - ge.Exam.StartTime).TotalHours.ToString("##,#")) saat vaxtınız vardir. Bu müddətdən səmərəli istifadə etməyə çalışın.
+                                    Bu müddət bitənə qədər cavablarınızı qeyd edib imtahanı bitirməyiniz tələb olunur...
+                                </div>
+                                <div class="modal-footer">
+                                    <a id="examTimer" asp-controller="Exam" asp-action="TakeExam" asp-route-id="@ge.Id" class="btn btn-default border-radius"><i class="fa fa-play"></i> İştirak Et</a>
+                                    <button type="button" class="btn btn-info" data-dismiss="modal">İmtina Et</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div>
+                            <div style="margin-top: 22px; margin-bottom: 5px;">
+                                <button onclick="jQuery('#modal-exam-@ge.Id').modal('show', { backdrop: 'static' });" class="btn btn-default border-radius">İmtahana Başla</button>
+                            </div>
+                        </div><!-- end dmbox -->
+                    </div>
+                </div>
+        <!-- end row -->
+                <hr class="invis">
+            }
+        }
+        else
+        {
+            <div class="row" style="border: 1px solid gray; border-radius: 5px;">
+                <div class="text-center">Bu bölmədə heç bir imtahan yoxdur ...</div>
+            </div>
+        }
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title text-center">
+                    <h4>Gələcək İmtahanlar</h4>
+                </div>
+            </div><!-- end col -->
+        </div>
+        <!-- end row -->
+        @{ var futureExams = Model.Where(ge => ge.Exam.Date.Add(ge.Exam.StartTime) > DateTime.Now).ToList();}
+        @if (futureExams.Any())
+        {
+            foreach (var ge in futureExams)
+            {
+                <div class="row" style="border: 1px solid gray; border-radius: 5px;">
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div>
+                            <div>
+                                <b>Qrup: </b>@ge.Group?.Name
+                            </div>
+                            <div>
+                                <b>İmtahanın Adı:</b> @ge.Exam.Name
+                            </div>
+                            <div>
+                            </div>
+                        </div><!-- end dmbox -->
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div>
+                            <div>
+                                <b>Tarix:</b> @ge.Exam.Date.ToString("dd.MM.yyyy")
+                            </div>
+                            <div>
+                                <b>Başlama Vaxtı:</b> @ge.Exam.StartTime
+                            </div>
+                            <div>
+                                <b>Bitmə Vaxtı:</b> @ge.Exam.EndTime
+                            </div>
+                        </div><!-- end dmbox -->
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div>
+                            <div style="margin-top: 22px; margin-bottom: 5px;">
+                                <button class="btn btn-default border-radius disabled"><i class="fa fa-sign-in"></i> Qeydiyyatdan Keç</button>
+                            </div>
+                        </div><!-- end dmbox -->
+                    </div>
+                </div>
+                <br />
+        <!-- end row -->
+            }
+        }
+        else
+        {
+            <div class="row" style="border: 1px solid gray; border-radius: 5px;">
+                <div class="text-center">Bu bölmədə heç bir imtahan yoxdur ...</div>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title text-center">
+                    <h4>Keçmiş İmtahanlar</h4>
+                </div>
+            </div><!-- end col -->
+        </div>
+        <!-- end row -->
+
+        @{ var passedExams = Model.Where(ge => ge.Exam.Date.Add(ge.Exam.EndTime) < DateTime.Now).ToList();}
+        @if (passedExams.Any())
+        {
+            foreach (var ge in passedExams)
+            {
+                <div class="row" style="border: 1px solid gray; border-radius: 5px;">
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div>
+                            <div>
+                                <b>Qrup: </b>@ge.Group?.Name
+                            </div>
+                            <div>
+                                <b>İmtahanın Adı:</b> @ge.Exam.Name
+                            </div>
+                            <div>
+                            </div>
+                        </div><!-- end dmbox -->
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div>
+                            <div>
+                                <b>Tarix:</b> @ge.Exam.Date.ToString("dd.MM.yyyy")
+                            </div>
+                            <div>
+                                <b>Başlama Vaxtı:</b> @ge.Exam.StartTime
+                            </div>
+                            <div>
+                                <b>Bitmə Vaxtı:</b> @ge.Exam.EndTime
+                            </div>
+                        </div><!-- end dmbox -->
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div>
+                            <div style="margin-top: 22px; margin-bottom: 5px;">
+                                <a asp-action="ViewExam" asp-route-id="@ge.Id" class="btn btn-default border-radius"><i class="fa fa-sign-in"></i> Sizin Nəticəniz</a>
+                            </div>
+                        </div><!-- end dmbox -->
+                    </div>
+                </div>
+                <br />
+        <!-- end row -->
+            }
+        }
+        else
+        {
+            <div class="row" style="border: 1px solid gray; border-radius: 5px;">
+                <div class="text-center">Bu bölmədə heç bir imtahan yoxdur ...</div>
+            </div>
+        }
+
+        <!-- Modal Exam Already Taken-->
+        <div class="modal fade" id="modal-examTaken" style="z-index: 10000;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Diqqət!</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        Siz bu imtahanda artıq iştirak etmisiniz..
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Bağla</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Exam Already Taken-->
+    <div class="modal fade" id="modal-examNotAvailable" style="z-index: 10000;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Diqqət!</h4>
+                </div>
+
+                <div class="modal-body">
+                    Siz bu imtahanda iştirak edə bilməzsiniz. Zəhmət olmasa sorğunuzu dəqiqləşdirin...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Bağla</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+        <!-- Modal Exam Not Taken-->
+        <div class="modal fade" id="modal-examNotTaken" style="z-index: 10000;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Diqqət!</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        Siz bu imtahanda iştirak etməmisiniz. Zəhmət olmasa sorğunuzu dəqiqləşdirin...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Bağla</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <hr class="invis">
+    </div><!-- end container -->
+</section><!-- end section -->
+
+<script>
+    $(document)
+        .ready(function () {
+            var examStatus = "@ViewBag.ExamStatus";
+            if (examStatus === "taken") {
+                jQuery('#modal-examTaken').modal('show', { backdrop: 'static' });
+            } else if (examStatus === "notAvailable") {
+                jQuery('#modal-examNotAvailable').modal('show', { backdrop: 'static' });
+            }
+            else if (examStatus === "notTaken") {
+                jQuery('#modal-examNotTaken').modal('show', { backdrop: 'static' });
+            }
+        });
+</script>

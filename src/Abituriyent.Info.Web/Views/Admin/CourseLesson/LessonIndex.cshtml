@@ -1,0 +1,59 @@
+@model IEnumerable<Abituriyent.Info.Core.Domain.CourseLesson>
+
+@{
+    ViewData["Title"] = "Course Lessons";
+    Layout = "_AdminLayout";
+    var courseId = Context.Request.Query["courseId"].FirstOrDefault();
+}
+<h2>Lessons</h2>
+<br/>
+    <p>
+        <a asp-action="LessonAdd" asp-route-courseId="@courseId">Add Lesson</a>
+    </p>
+
+<table class="table table-bordered table-striped datatable" id="table-2">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Lesson.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Lesson.PdfFile)</th>
+            <th>@Html.DisplayNameFor(model => model.Lesson.VideoUrl)</th>
+            <th class="text-center">Actions</th>
+            <th>Related Lessons</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lesson.Name)
+            </td>
+            <td>
+                @if (item.Lesson.PdfFile != null)
+                {
+                    <a asp-controller="Admin" asp-action="ReadPdf" asp-route-lessonId="@item.Id" alt="Image">View PDF</a>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lesson.VideoUrl)
+            </td>
+            <td>
+                <form asp-controller="Admin" asp-action="CourseLessonDelete" method="post">
+                    <input type="hidden" name="id" value="@item.Id" />
+                    <button onclick="return confirm('Are you sure you want to delete this item ?')" type="submit" class="btn btn-danger btn-sm btn-icon icon-left">
+                        <i class="entypo-cancel"></i>
+                        Delete
+                    </button>
+                </form>
+            </td>
+            <td>
+                <a asp-action="QuizTestIndex" asp-route-lessonId="@item.Id" class="btn btn-green btn-sm btn-icon icon-left">
+                    <i class="entypo-bag"></i>
+                    View Quiz Tests
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

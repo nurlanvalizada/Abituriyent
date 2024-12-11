@@ -1,0 +1,40 @@
+@model Abituriyent.Info.Web.Models.AdminViewModels.TestViewModel
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "";
+}
+
+<p>Content</p>
+<div class="panel-body" style="border: 1px solid transparent; border-radius: 3px;border-color: #ebebeb;margin-bottom: 1%;">
+    <div id="content" class="col-md-9">
+        @Html.Raw(Model.Test.Test.Content)
+    </div>
+    <div class="col-md-offset-3">
+        <input hidden name="Test.Test.Content" id="testcontent" value="@Model.Test.Test.Content" />
+        <input hidden name="Test.Test.Status" value="true" />
+        <input hidden name="Test.Test.TestType" value="@Model.Test.Test.TestType" />
+        <input hidden name="Test.Test.Id" value="@Model.Test.Test.Id" />
+        <input hidden name="Test.CourseLesson.LessonId" value="@Model.Test.CourseLesson.LessonId" />
+        <a href="#" onclick="content()" class="btn btn-default btn-sm btn-icon icon-left pull-right" id="edit">
+            <i class="entypo-pencil"></i>
+            Edit
+        </a>
+        <a href="#" onclick="save()" class="btn btn-default btn-sm btn-icon icon-left pull-right" id="save" style="display:none">
+            <i class="entypo-pencil"></i>
+            Save
+        </a>
+
+    </div>
+</div>
+<p>Answer</p>
+<div class="panel-body" style="border: 1px solid transparent; border-radius: 3px;border-color: #ebebeb;margin-bottom: 1%;">
+
+    <div class="form-group">
+        <label asp-for="Test.Test.TestAnswer.Answer.Text" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Test.Test.TestAnswer.Answer.Text" class="form-control" />
+            <span asp-validation-for="Test.Test.TestAnswer.Answer.Text" class="text-danger"></span>
+        </div>
+    </div>      
+</div>
+<input type="submit" value="Save"  class="btn btn-default btn-sm btn-icon icon-left" />

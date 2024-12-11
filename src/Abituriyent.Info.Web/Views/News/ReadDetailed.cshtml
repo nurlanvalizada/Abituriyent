@@ -1,0 +1,59 @@
+﻿@model Abituriyent.Info.Core.Domain.News
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div id="fb-root"></div>
+<section class="grey section">
+    <div class="container">
+        <div class="row">
+            <div id="content" class="col-md-12 col-sm-12 col-xs-12">
+                <div class="blog-wrapper">
+                    <div class="row second-bread">
+                        <div class="col-md-6 text-left">
+                            <h1>Xəbərlər</h1>
+                        </div><!-- end col -->
+                        <div class="col-md-6 text-right">
+                            <div class="bread">
+                                <ol class="breadcrumb">
+                                    <li><a href="#">Home</a></li>
+                                    <li class="active">News</li>
+                                </ol>
+                            </div><!-- end bread -->
+                        </div><!-- end col -->
+                    </div><!-- end row -->
+                </div><!-- end blog-wrapper -->
+                <div class="blog-wrapper single-blog-wrapper">
+                    <div class="blog-title">
+                        <h2>@Html.Raw(Model.Title)</h2>
+                        <div class="post-meta">
+                            <span>
+                                <i class="fa fa-user"></i>
+                                <a href="#">@Model.Admin.Person.FirstName @Model.Admin.Person.LastName tərəfindən</a>
+                            </span>
+                        </div>
+                    </div><!-- end blog-title -->
+                    <div class="blog-image">
+                        <p>
+                            @if (Model.ImageUrl != null)
+                            {
+                                <img src="@Model.ImageUrl" alt="" class="img-responsive center-block">
+                            }
+                            else
+                            {
+                                <img src="~/upload/blog_01.jpg" alt="" class="img-responsive center-block">
+                            }
+                        </p>
+                    </div><!-- end image -->
+                    <div class="blog-desc">
+                        @Html.Raw(Model.Content)
+                    </div><!-- end desc -->
+                </div><!-- end blog-wrapper -->
+                <hr class="invis">
+                <div class="blog-wrapper comment-wrapper">
+                    <div class="fb-comments" data-href="http://localhost:52198/News/ReadDetailed/@Model.Id" data-width="100%" data-numposts="5"></div>
+                </div><!-- end blog-wrapper -->
+            </div><!-- end content -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section><!-- end section -->

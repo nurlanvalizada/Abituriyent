@@ -1,0 +1,49 @@
+﻿@model Abituriyent.Info.Web.Models.AdminViewModels.CourseSubjectViewModel
+
+@{
+    ViewData["Title"] = "Create Subject";
+    Layout = "_AdminLayout";
+}
+
+<h2>Create</h2>
+
+<form asp-action="SubjectCreate" enctype="multipart/form-data">
+    <div class="form-horizontal">
+        <h4>Subject</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Subject.Status" value="true" />
+        <div class="form-group">
+            <label asp-for="Subject.Name" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Subject.Name" class="form-control" />
+                <span asp-validation-for="Subject.Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Groups</label>
+            <div class="panel panel-gradient col-md-offset-2 col-md-10">
+                @foreach (var group in Model.Groups)
+                {
+                    <p>
+                        <input id="group@(group.Id)" type="checkbox"
+                               name="GroupIds"
+                               value="@group.Id" />
+                        <label>@group.Name</label>
+                    </p>
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-11">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+
+</form>
+
+<div>
+    <a asp-action="SubjectIndex">Back to List</a>
+</div>
