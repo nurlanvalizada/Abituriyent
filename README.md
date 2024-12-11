@@ -2,6 +2,8 @@
 
 Abituriyent is a web application designed to provide information and resources for students. The application includes features such as contact details, happy student testimonials, and a contact form.
 
+I have built this platform in 2015 for commercial purposes and then made it open sourced to show how the production ready application can be built using Asp.Net Core 1.0
+
 ## Table of Contents
 
 - [Features](#features)
